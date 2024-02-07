@@ -1,12 +1,12 @@
-package test;
+package com.insilicogen.CRUD_PRJ;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestApplication {
+public class CRUD_PRJApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestApplication.class, args);
+		SpringApplication.run(CRUD_PRJApplication.class, args);
 	}
 }
