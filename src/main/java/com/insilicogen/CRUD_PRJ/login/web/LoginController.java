@@ -1,4 +1,4 @@
-package com.insilicogen.CRUD_PRJ.login.controller;
+package com.insilicogen.CRUD_PRJ.login.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,5 +10,4 @@ public class LoginController {
 	public String test(Model model) {
 		return "index";
 	}
-	
 }
