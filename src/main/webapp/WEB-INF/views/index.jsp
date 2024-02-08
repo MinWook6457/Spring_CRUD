@@ -1,5 +1,5 @@
-<html>
-<body>
-<h2>CRUD PROJECT</h2>
-</body>
-</html>
+<!DOCTYPE>
+
+<script>
+	location.href = "/inco/login";
+</script>

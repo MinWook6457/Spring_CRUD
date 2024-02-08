@@ -3,11 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>회원가입 성공</title>
+<meta charset="UTF-8">
+<title>가입 성공 ㅋㅎㅋㅎ</title>
 </head>
 <body>
-    <h2>회원가입이 성공적으로 완료되었습니다!</h2>
-    
+
 </body>
 </html>

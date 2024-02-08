@@ -28,5 +28,7 @@ public class UserRegisterService {
 
         // UserRepository를 사용하여 User 엔티티를 저장
         userRepository.save(user);
+        
+        System.out.println("유저 정보 db 저장 완료");
     }
 }

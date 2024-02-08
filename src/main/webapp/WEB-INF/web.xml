@@ -17,10 +17,15 @@
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.do</url-pattern>
+        <servlet-name>otherServlet</servlet-name>
+        <url-pattern>*.json</url-pattern>
     </servlet-mapping>-->
 
     <!-- Character Encoding Filter -->
+    <welcome-file-list>
+	  <welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

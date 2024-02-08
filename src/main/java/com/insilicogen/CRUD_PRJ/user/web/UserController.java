@@ -1,35 +1,42 @@
 package com.insilicogen.CRUD_PRJ.user.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.insilicogen.CRUD_PRJ.user.service.UserRegisterService;
 import com.insilicogen.CRUD_PRJ.user.service.DTO.UserDto;
 
 @Controller
 public class UserController {
-	private final UserRegisterService userRegisterService;
-
-	public UserController(UserRegisterService userRegisterService) {
-		this.userRegisterService = userRegisterService;
+	
+	@Autowired
+	private UserRegisterService userRegisterService;	
+	/**
+	 * 회원 가입 화면
+	 * @return /user/insertUser.jsp
+	 */
+	@GetMapping("/user/insertUser.do") 
+    public String insertUser() {
+        return "/user/insertUser";
+    }
+	/**
+	 * 회원 등록 폼
+	 * @return 
+	 */
+	@PostMapping("/user/insertUser.json")
+	@ResponseBody
+	public String insertUserJSON(UserDto userDto) {
+	    // 추출된 데이터를 이용하여 회원 가입 로직을 처리합니다.
+	    userRegisterService.registerUser(userDto); 	
+	    return "200"; // 임시로 200 
 	}
 
-	@PostMapping("/register") // CREATE
-	public String register(@ModelAttribute UserDto userDto, Model model) {
-		userRegisterService.registerUser(userDto);
-		return "redirect:/registerSuccess";
-	}
-
-	@GetMapping("/registerForm") // 회원 가입 폼
-	public String showRegisterForm() {
-		return "registerForm";
-	}
-
-	@GetMapping("/registerSuccess") // 회원 가입 성공 리다이렉트
-	public String showRegisterSuccessPage() {
-		return "registerSuccess";
+	@GetMapping("/registerSuccess") 
+	public String showRegisterSuccessReloadLogin() {
+		return "login";
 	}
 }
