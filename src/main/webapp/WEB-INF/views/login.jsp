@@ -8,7 +8,7 @@
     <script>
         $(document).ready(function() {
             $("#registerBtn").click(function() {
-                window.location.href = "/inco/user/insertUser.do"; // 버튼 클릭 시 /user/insertUser.do 경로로 이동
+                window.location.href = "/inco/user/insertUser.do"; // 회원가입 페이지로 이동
             });
         });
     </script>
@@ -18,7 +18,7 @@
         아이디 : <input type="text" id="user_id" name="id" required autofocus required><br>
         비밀번호 : <input type="password" id="user_pw" name="pw" required><br>
         <input type="submit" value="로그인"> 
-        <input type="button" id="registerBtn" value="회원가입"> 
+        <input type="button" id="registerBtn" value="회원가입"> <!-- 회원 가입 버튼을 일반 버튼으로 변경 -->
     </form>
 </body>
 </html>

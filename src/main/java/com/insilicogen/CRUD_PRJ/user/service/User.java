@@ -46,7 +46,9 @@ public class User {
     @NotNull
     private String hintAnswer;
 
+    /*
     @ManyToOne
     @JoinColumn(name = "PSWD_HINT_SN")
     private PSWD_HINT pswdHint;
+    */
 }
