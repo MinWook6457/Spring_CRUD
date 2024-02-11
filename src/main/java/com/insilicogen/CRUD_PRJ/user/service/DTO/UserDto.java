@@ -1,6 +1,6 @@
 package com.insilicogen.CRUD_PRJ.user.service.DTO;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Data;
 import lombok.Getter;
@@ -16,7 +16,7 @@ public class UserDto {
     private String userNm;
     private String password;
     private Character sex;
-    private LocalDateTime dateOfBirth;
+    private Date dateOfBirth;
     private String hintAnswer;
 }
 

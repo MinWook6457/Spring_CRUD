@@ -24,6 +24,7 @@ public class UserController {
 	
 	@GetMapping("/user/insertUser.do")
 	public String insertUser() {
+		System.out.println("insertUser 컨트롤러 진입");
 		return "/user/insertUser";
 	}
 	
@@ -36,6 +37,7 @@ public class UserController {
 	@PostMapping("/user/insertUser.json")
 	@ResponseBody
 	public String insertUserJSON(@RequestBody UserDto userDto) {
+		System.out.println("insertUserJSON 컨트롤러 진입");
 	    userRegisterService.registerUser(userDto); 	
 	    return "200"; // 임시로 200 
 	}
