@@ -7,9 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size; // Hibernate Validator 인터페이스 : jakarta
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,6 +36,8 @@ public class User {
 
     @Column(name = "PSWD", length = 30)
     @NotNull
+    @NotBlank
+    @Size(min=8)
     private String password;
 
     @Column(name = "SEXDSTN", length = 1)
@@ -44,9 +50,8 @@ public class User {
     @NotNull
     private String hintAnswer;
 
-    /*
     @ManyToOne
     @JoinColumn(name = "PSWD_HINT_SN")
     private PSWD_HINT pswdHint;
-    */
+    
 }

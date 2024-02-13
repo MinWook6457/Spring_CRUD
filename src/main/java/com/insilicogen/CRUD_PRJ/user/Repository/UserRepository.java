@@ -6,5 +6,5 @@ import com.insilicogen.CRUD_PRJ.user.service.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-	//
+	User findByUserLoginId(String userLoginId); // 로그인 아이디 조회
 }
