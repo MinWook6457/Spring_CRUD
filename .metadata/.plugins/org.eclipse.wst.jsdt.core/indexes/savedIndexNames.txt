@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+C:\Users\kih25\OneDrive\바탕 화면\Test\BS\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2327865791.index
+3896717571.index
+246382353.index
+1173412429.index
+1953679103.index

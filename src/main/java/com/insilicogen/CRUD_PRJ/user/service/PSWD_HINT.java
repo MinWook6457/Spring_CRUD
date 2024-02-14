@@ -19,6 +19,7 @@ public class PSWD_HINT {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PSWD_HINT_SN")
 	private Integer pswdHintSn;
 	
 	@Column(name = "HINT_CN", length = 300)

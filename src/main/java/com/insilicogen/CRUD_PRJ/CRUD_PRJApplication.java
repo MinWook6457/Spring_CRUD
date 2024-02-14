@@ -2,7 +2,6 @@ package com.insilicogen.CRUD_PRJ;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 @SpringBootApplication
 public class CRUD_PRJApplication {
 

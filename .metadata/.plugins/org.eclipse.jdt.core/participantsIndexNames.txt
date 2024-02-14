@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+C:\Users\kih25\OneDrive\바탕 화면\Test\BS\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2185889047.index
+\BS2\src\main\java
+C:\Users\kih25\OneDrive\바탕 화면\Test\BS\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3461353871.index
+\BS2\src\main\java
+C:\Users\kih25\OneDrive\바탕 화면\Test\BS\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\112236029.index
+\BS2\src\main\java

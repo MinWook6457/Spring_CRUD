@@ -23,7 +23,9 @@ public class UserController {
 	@Autowired
 	private UserRegisterService userRegisterService;
 
-	@Autowired
+	@Autowired 
+	
+	
 	private HintRepository hintRepository;
 
 	/**
@@ -67,27 +69,27 @@ public class UserController {
 
 	@PostMapping("/user/checkDuplicateId")
 	@ResponseBody
-	public String checkDuplicateId(@RequestParam("userLoginId") String userLoginId) {
+	public boolean checkDuplicateId(@RequestParam("userLoginId") String userLoginId) {
 		System.out.println("중복 검사 컨트롤러 진입");
 		boolean isDuplication = userRegisterService.isUserIdDuplicated(userLoginId);
 
 		if (isDuplication)
-			return "중복";
+			return false; // 중복
 		else
-			return "사용가능"; // 중복 아님
+			return true; // 유효한 아이디
 	}
 
 	@PostMapping("/user/checkPassWord")
 	@ResponseBody
-	public String checkPassWord(@RequestParam("password") String password) {
+	public boolean checkPassWord(@RequestParam("password") String password) {
 		System.out.println("비밀번호 검사 컨트롤러 진입");
 		
 		if (password.length() < 8 || !password.matches(".*[0-9].*") // 숫자
 				|| !password.matches(".*[a-zA-Z].*") // 영문자
 				|| !password.matches(".*[!@#$%^&*()].*")) { // 특수문자
-			return "비밀번호는 숫자, 영문자, 특수문자를 포함하여 최소 8자리 이상이어야 합니다.";
+			return false;
 		} else {
-			return "비밀번호가 유효합니다.";
+			return true;
 		}
 	}
 }

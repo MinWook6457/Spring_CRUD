@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,9 +50,9 @@ public class User {
     @Column(name = "HINT_CNSR", length = 150)
     @NotNull
     private String hintAnswer;
-
+    
     @ManyToOne
     @JoinColumn(name = "PSWD_HINT_SN")
-    private PSWD_HINT pswdHint;
-    
+    private PSWD_HINT pswdHintSn;
+
 }

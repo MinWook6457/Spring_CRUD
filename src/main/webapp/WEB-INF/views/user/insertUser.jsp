@@ -8,95 +8,123 @@
 <title>회원가입 폼</title>
 
 <script>
-    $(document).ready(function() {
-        $('#registerForm').validate({
-            rules: {
-                userLoginId: {
-                    required: true,
-                    minlength: 2,
-                    remote: {
-                        url: '/inco/user/checkDuplicateId',
-                        type: 'POST',
-                        data: {
-                            userLoginId: function(res) {
-                                return $('#login_id').val();
-                            }
-                        }
-                    }
-                },
-                password : {
-                    required : true,
-                    minlength : 8,
-                    remote: {
-                        url: '/inco/user/checkPassWord',
-                        type: 'POST',
-                        data: {
-                            password: function(res) {
-                                return $('#password').val();
-                            }
-                        }
-                    }       
-                }
-            },
-            messages: {
-                userLoginId: {
-                    remote: '이미 사용 중인 아이디입니다.',
-                    minlength: '아이디는 최소 2자 이상이어야 합니다.'
-                },
-                password : {
-                    remote: '비밀번호는 숫자, 영문, 특수문자를 포함하여 최소 8자리 이상이어야 합니다.',
-                    minlength: '비밀번호는 최소 8자 이상이어야 합니다.'
-                }
-            },
-            submitHandler: function() {
-            	console.log("submit Handler Called!");
-                var userBodyData = {
-                    userLoginId: $('#login_id').val(),
-                    userNm: $('#user_name').val(),
-                    password: $('#password').val(),
-                    sex: $('#sex').val(),
-                    dateOfBirth: $('#birth').val(),
-                    hintAnswer: $('#hint_comment').val()
-                };
-
-                var hintValue = $('#hint_question').val();
-                var hintValues = hintValue.split(',');
-
-                var hintParamData = {
-                    pswdHintSn: hintValues[0],
-                    hintCn: hintValues[1]
-                };
-
-                var formData = {
-                    body: userBodyData,
-                    param: hintParamData
-                };
-
-                $.ajax({
+$(document).ready(function() {
+	
+    $('#registerForm').validate({
+    	
+        rules: {
+            userLoginId: {
+                required: true,
+                minlength: 2,
+                remote: {
+                    url: '/inco/user/checkDuplicateId',
                     type: 'POST',
-                    url: "/inco/user/insertUser.json",
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        console.log(response);
-                        alert('회원가입이 완료되었습니다.');
-                        location.href = '/inco/login';
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(xhr.responseText);
-                        alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+                    data: {
+                        userLoginId: function() {
+                            return $('#login_id').val();
+                        }
                     }
-                });
+                }
+            },
+            password: {
+                required: true,
+                minlength: 8,
+                remote: {
+                    url: '/inco/user/checkPassWord',
+                    type: 'POST',
+                    data: {
+                        password: function() {
+                            return $('#password').val();
+                        }
+                    }
+                }
             }
-        });  
+        },
+        messages: {
+            userLoginId: {
+                remote: '이미 사용 중인 아이디입니다.',
+                minlength: '아이디는 최소 2자 이상이어야 합니다.'
+            },
+            password: {
+                remote: '비밀번호는 숫자, 영문, 특수문자를 포함하여 최소 8자리 이상이어야 합니다.',
+                minlength: '비밀번호는 최소 8자 이상이어야 합니다.'
+            }
+        },
+        submitHandler: function(form){
+            console.log("submit!");
+            console.log(form);
+            form.submit(); // 폼 제출
+        },
         
-        
-        $("#submitBtn").on("click", function (e) {
-        	e.preventDefault();
-        	$('#registerForm').submit(); 
-        });
-        
+        invalidHandler: function(event, validator) {
+        	   console.log("이거 안 됨 ㅋㅋ");
+        }
     });
+    
+ // 중복 아이디 검사 
+    $('#login_id').blur(function() { // 입력 필드에 포커스가 사라질 때마다 해당 함수 내의 코드를 실행하도록 설정
+        var loginId = $(this).val(); // 입력된 아이디 값
+        var password = $('#password').val(); // 비밀번호 값
+        $.post('/inco/user/checkDuplicateId', { userLoginId: loginId }, function(duplicateResponse) {
+            $.post('/inco/user/checkPassWord', { password: password }, function(passwordResponse) {
+                if (!duplicateResponse || !passwordResponse) {
+                    $('#submitBtn').prop('disabled', true); // 가입 버튼 비활성화
+                } else {
+                    $('#submitBtn').prop('disabled', false); // 가입 버튼 활성화
+                }
+            });
+        });
+    });
+
+
+
+    
+    
+
+    $('#submitBtn').click(function(event) {
+        event.preventDefault(); 
+        if ($('#registerForm').valid()) {
+            var userBodyData = {
+                userLoginId: $('#login_id').val(),
+                userNm: $('#user_name').val(),
+                password: $('#password').val(),
+                sex: $('#sex').val(),
+                dateOfBirth: $('#birth').val(),
+                hintAnswer: $('#hint_comment').val()
+            };
+
+            var hintValue = $('#hint_question').val();
+            var hintValues = hintValue.split(',');
+
+            var hintParamData = {
+                pswdHintSn: hintValues[0],
+                hintCn: hintValues[1]
+            };
+
+            var formData = {
+                body: userBodyData,
+                param: hintParamData
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: "/inco/user/insertUser.json",
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    console.log(response);
+                    alert('회원가입이 완료되었습니다.');
+                    location.href = '/inco/login';
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+                }
+            });
+        }
+    });
+});
+
 </script>
 
 
