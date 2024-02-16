@@ -1,5 +1,5 @@
 <!DOCTYPE>
 
 <script>
-	location.href = "/inco/login";
+	location.href = "/home";
 </script>

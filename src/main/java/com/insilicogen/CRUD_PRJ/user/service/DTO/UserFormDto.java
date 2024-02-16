@@ -1,4 +1,4 @@
-package com.insilicogen.CRUD_PRJ.user.service.DTO;
+package com.insilicogen.CRUD_PRJ.user.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,4 +10,3 @@ public class UserFormDto {
     private HintParamDto param;
     // getters and setters
 }
-

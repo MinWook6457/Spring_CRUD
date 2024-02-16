@@ -1,4 +1,4 @@
-package com.insilicogen.CRUD_PRJ.user.service.DTO;
+package com.insilicogen.CRUD_PRJ.user.service.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,4 +11,3 @@ public class HintParamDto {
     private Integer pswdHintSn;
     private String hintCn;
 }
-

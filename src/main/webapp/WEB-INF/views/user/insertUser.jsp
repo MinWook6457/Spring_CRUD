@@ -9,15 +9,13 @@
 
 <script>
 $(document).ready(function() {
-	
     $('#registerForm').validate({
-    	
         rules: {
             userLoginId: {
                 required: true,
                 minlength: 2,
                 remote: {
-                    url: '/inco/user/checkDuplicateId',
+                    url: '/user/checkDuplicateId',
                     type: 'POST',
                     data: {
                         userLoginId: function() {
@@ -30,7 +28,7 @@ $(document).ready(function() {
                 required: true,
                 minlength: 8,
                 remote: {
-                    url: '/inco/user/checkPassWord',
+                    url: '/user/checkPassWord',
                     type: 'POST',
                     data: {
                         password: function() {
@@ -61,12 +59,12 @@ $(document).ready(function() {
         }
     });
     
- // 중복 아이디 검사 
+    // 중복 아이디 검사 
     $('#login_id').blur(function() { // 입력 필드에 포커스가 사라질 때마다 해당 함수 내의 코드를 실행하도록 설정
         var loginId = $(this).val(); // 입력된 아이디 값
         var password = $('#password').val(); // 비밀번호 값
-        $.post('/inco/user/checkDuplicateId', { userLoginId: loginId }, function(duplicateResponse) {
-            $.post('/inco/user/checkPassWord', { password: password }, function(passwordResponse) {
+        $.post('/user/checkDuplicateId', { userLoginId: loginId }, function(duplicateResponse) {
+            $.post('/user/checkPassWord', { password: password }, function(passwordResponse) {
                 if (!duplicateResponse || !passwordResponse) {
                     $('#submitBtn').prop('disabled', true); // 가입 버튼 비활성화
                 } else {
@@ -108,13 +106,13 @@ $(document).ready(function() {
 
             $.ajax({
                 type: 'POST',
-                url: "/inco/user/insertUser.json",
+                url: "/user/insertUser.json",
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
                 success: function(response) {
                     console.log(response);
                     alert('회원가입이 완료되었습니다.');
-                    location.href = '/inco/login';
+                    location.href = '/home';
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr.responseText);

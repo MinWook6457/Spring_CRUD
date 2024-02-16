@@ -1,4 +1,4 @@
-package com.insilicogen.CRUD_PRJ.user.service.DTO;
+package com.insilicogen.CRUD_PRJ.user.service.dto;
 
 import java.util.Date;
 
@@ -19,5 +19,3 @@ public class UserDto {
     private Date dateOfBirth;
     private String hintAnswer;
 }
-
-
