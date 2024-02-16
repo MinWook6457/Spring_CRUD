@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.insilicogen.CRUD_PRJ.user.repository.HintRepository;
 import com.insilicogen.CRUD_PRJ.user.service.PSWD_HINT;
+import com.insilicogen.CRUD_PRJ.user.service.User;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 import com.insilicogen.CRUD_PRJ.user.service.VO.UserFindPWVO;
 import com.insilicogen.CRUD_PRJ.user.service.dto.UserDto;
 import com.insilicogen.CRUD_PRJ.user.service.dto.UserFormDto;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -50,17 +53,17 @@ public class UserController {
 	 */
 	@PostMapping("/user/insertUser.json")
 	@ResponseBody
-	public String insertUserJSON(@RequestBody UserFormDto formData) {
+	public User insertUserJSON(@RequestBody @Valid UserFormDto formData) {
 		System.out.println("insertUserJSON 컨트롤러 진입");
 		UserDto userDto = formData.getBody();
 
 		Integer pswdHintSn = formData.getParam().getPswdHintSn();
-		String pswdHintCn = formData.getParam().getHintCn(); // null 값이 가져와짐
-
+		String pswdHintCn = formData.getParam().getHintCn(); 
+		
 		PSWD_HINT pwsdHint = new PSWD_HINT(pswdHintSn, pswdHintCn);
 
-		userService.registerUser(userDto, pwsdHint);
-		return "200";
+		User registUser = userService.registerUser(userDto, pwsdHint);
+		return registUser;
 	}
 
 	@GetMapping("/registerSuccess")

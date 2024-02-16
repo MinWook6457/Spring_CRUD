@@ -44,14 +44,13 @@
 	})
 </script>
 <form id="findUserForm" action="/user/findUserPW" method='post'>
-	<label for="userLoginId">아이디를 입력해주세요:</label> <input type="text"
-		id="userLoginId" name="userLoginId" required> <select
-		id="hint_question" name="hintQuestion">
+	<label for="userLoginId">아이디를 입력해주세요:</label> <input type="text" id="userLoginId" name="userLoginId" required> 
+	<select id="hint_question" name="hintQuestion">
 		<c:forEach var="hintQuestion" items="${hintQuestions}">
 			<option value="${hintQuestion.pswdHintSn} , ${hintQuestion.hintCn}">${hintQuestion.hintCn}</option>
 		</c:forEach>
 	</select> 
-	<br> <br> 
+	<br><br> 
 	<label for="hint_comment">비밀번호 힌트 답변 : </label> 
 	<input type="text" id="hint_comment" name="hintAnswer"> 
 	<input type="button" id="findUserInfoBtn" value="입력">

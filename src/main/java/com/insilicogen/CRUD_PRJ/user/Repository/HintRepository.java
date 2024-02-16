@@ -9,5 +9,5 @@ import com.insilicogen.CRUD_PRJ.user.service.PSWD_HINT;
 @Repository
 public interface HintRepository extends JpaRepository<PSWD_HINT, Long>{
 	@Query("SELECT n FROM PSWD_HINT n")
-    List<PSWD_HINT> findAll();
+    List<PSWD_HINT> findAll();  
 }

@@ -8,5 +8,5 @@ import lombok.Setter;
 public class UserFormDto {
     private UserDto body;
     private HintParamDto param;
-    // getters and setters
+  
 }
