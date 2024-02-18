@@ -7,7 +7,6 @@
 
 <title>비밀번호 찾기 페이지</title>
 
-
 <script>
 	$(document).ready(function() {
 		$('#findUserInfoBtn').click(function(event){	

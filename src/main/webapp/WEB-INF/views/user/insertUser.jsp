@@ -130,7 +130,7 @@ $(document).ready(function() {
 
 <h2>회원가입 폼</h2>
 <form id="registerForm" method="POST">
-	<label for="login_id">로그인 ID:</label> <input type="text" id="login_id"name="userLoginId" required> 
+	<label for="login_id">로그인 ID:</label> <input type="text" id="login_id" name="userLoginId" required> 
 	<br><br> 
 	<label for="user_name">사용자 이름:</label> <input type="text" id="user_name" name="userNm" required> 
 	<br><br> 

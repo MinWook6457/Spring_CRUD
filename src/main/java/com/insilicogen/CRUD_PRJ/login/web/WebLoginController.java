@@ -59,7 +59,7 @@ public class WebLoginController {
 			HttpSession session = req.getSession();
 			session.setAttribute("loginUser", loginUserDto);
 
-			// 환영 페이지로 리다이렉트합니다.
+			// 환영 페이지로 리다이렉트
 			return "redirect:/welcome";
 		}
 	}

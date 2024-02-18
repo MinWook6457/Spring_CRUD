@@ -23,7 +23,7 @@
             event.preventDefault();
             var userLoginData = {
                 userLoginId : $('#user_lgn_id').val(),
-                userPassword : $('#user_pw').val()
+                userPassWord : $('#user_pw').val()
             };  
             $.ajax({
                 type: 'POST',

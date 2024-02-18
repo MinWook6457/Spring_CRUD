@@ -128,4 +128,12 @@ public class UserController {
 			return "User not found or hint answer is incorrect"; // 유저를 찾지 못하거나 힌트 답변이 일치하지 않는 경우 메시지 반환
 		}
 	}
+	
+	@GetMapping("/user/modifyUserInfo.do")
+	public String modifyUserInfo(Model model) {
+
+		return "/user/modifyUserInfo";
+	}
+	
+	
 }
