@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="../common/include.jsp"/>
+
+<script>
+$(document).ready(function(){
+	$("#writeBoard").submit(function(event){
+		event.preventDefault();
+		
+		
+		var writingData = {
+			boardTitle : $('title').val(),
+			boardContent :  $('content').val(),
+			priorityPostingOption; :  $('priorityPostingOption').val(),
+			usingOption; :  $('usingOption').val(),
+			isDeletedOption; :  $('isDeletedOption').val(),
+					
+			userDto : ${sessionScope.loginUser}
+		
+            userDto: {
+                userLoginId: '<%= session.getAttribute("userLoginId") %>',
+                userNm: '<%= session.getAttribute("userNm") %>',
+                password: '<%= session.getAttribute("password") %>',
+                sex: '<%= session.getAttribute("sex") %>',
+                dateOfBirth: '<%= session.getAttribute("dateOfBirth") %>',
+                hintAnswer: '<%= session.getAttribute("hintAnswer") %>'
+            }
+
+		}
+
+	})
+
+})
+
+</script>
+
+<body>
+	<div class="container">
+		<hi class="mt-5"> 글 쓰기 페이지 </hi>
+		<form id = "writeBoard" method ="post">
+			 <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">내용</label>
+                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+            </div>    
+            <div class="form-group">
+                <label for="priorityPostingOption">우선 게시 여부</label>
+                <select class="form-control" id="priorityPostingOption" name="priorityPostingOption">
+                    <option value="Y">예</option>
+                    <option value="N" selected>아니요</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="usingOption">게시 여부</label>
+                <select class="form-control" id="usingOption" name="usingOption">
+                    <option value="Y">사용</option>
+                    <option value="N" selected>사용하지 않음</option>
+                </select>
+            </div>
+             <div class="form-group">
+                <label for="usingOption">사용 여부</label>
+                <select class="form-control" id="isDeletedOption;" name="isDeletedOption;">
+                    <option value="Y">사용</option>
+                    <option value="N" selected>사용하지 않음</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">작성</button>
+                <a href="/home" class="btn btn-secondary">취소</a>
+            </div>
+		</form>
+	</div>
+</body>

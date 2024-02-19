@@ -10,7 +10,7 @@
 <script>
 	$(document).ready(function() {
 		$('#findUserInfoBtn').click(function(event){	
-			event.preventDefault();
+			 event.preventDefault();
 			 var userLoginId = $('#userLoginId').val();
 	         var hintData = $('#hint_question').val().split(","); // 힌트 질문의 값에서 힌트 번호와 힌트 내용을 추출
 	         

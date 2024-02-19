@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import com.insilicogen.CRUD_PRJ.user.service.PSWD_HINT;
 import com.insilicogen.CRUD_PRJ.user.service.User;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 import com.insilicogen.CRUD_PRJ.user.service.VO.UserFindPWVO;
+import com.insilicogen.CRUD_PRJ.user.service.VO.UserModifyVO;
 import com.insilicogen.CRUD_PRJ.user.service.dto.UserDto;
 import com.insilicogen.CRUD_PRJ.user.service.dto.UserFormDto;
 
@@ -129,11 +131,23 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/user/modifyUserInfo.do")
+	@GetMapping("/user/modifyUserPW.do")
 	public String modifyUserInfo(Model model) {
-
-		return "/user/modifyUserInfo";
+		
+		return "/user/modifyUserPW";
 	}
 	
-	
+	@PostMapping("/user/modifyUserPW")
+	@ResponseBody
+	public String modifyUserData(@RequestBody UserModifyVO userModifyVo) {
+		System.out.println("비밀번호 수정 컨트롤러 진입");
+	    String modifyUserLgnId = userModifyVo.getUserLoginId();
+	    String modifyUserPassWord = userModifyVo.getUserPassWord();
+
+	    if (userService.updateUserPassword(modifyUserLgnId,modifyUserPassWord)) {
+	        return "비밀번호 수정 성공";
+	    } else {
+	        return "비밀번호 수정 실패";
+	    }
+	}
 }
