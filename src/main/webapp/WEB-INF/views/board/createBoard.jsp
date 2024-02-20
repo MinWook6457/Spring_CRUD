@@ -5,40 +5,39 @@
 
 <script>
 $(document).ready(function(){
-	$("#writeBoard").submit(function(event){
-		event.preventDefault();
-		
-		
-		var writingData = {
-			boardTitle : $('title').val(),
-			boardContent :  $('content').val(),
-			priorityPostingOption; :  $('priorityPostingOption').val(),
-			usingOption; :  $('usingOption').val(),
-			isDeletedOption; :  $('isDeletedOption').val(),
-					
-			userDto : ${sessionScope.loginUser}
-		
-            userDto: {
-                userLoginId: '<%= session.getAttribute("userLoginId") %>',
-                userNm: '<%= session.getAttribute("userNm") %>',
-                password: '<%= session.getAttribute("password") %>',
-                sex: '<%= session.getAttribute("sex") %>',
-                dateOfBirth: '<%= session.getAttribute("dateOfBirth") %>',
-                hintAnswer: '<%= session.getAttribute("hintAnswer") %>'
+    $("#writeBoard").submit(function(event){
+        event.preventDefault();
+
+        var writingData = {
+            boardTitle: $('#title').val(),
+            boardContent: $('#content').val(),
+            priorityPostingOption: $('#priorityPostingOption').val(),
+            usingOption: $('#usingOption').val(),
+            isDeletedOption: $('#isDeletedOption').val(),
+            userLoginId: '${sessionScope.loginUser.userLoginId}'
+        };
+
+
+        $.ajax({
+            type: 'POST',
+            url: "/board/writeBoard",
+            contentType: 'application/json',
+            data: JSON.stringify(writingData),
+            success: function(response) {
+                alert('글쓰기 완료');
+                location.href = '/welcome';
             }
+        });
+    });
+});
 
-		}
-
-	})
-
-})
 
 </script>
 
 <body>
 	<div class="container">
 		<hi class="mt-5"> 글 쓰기 페이지 </hi>
-		<form id = "writeBoard" method ="post">
+		<form id = "writeBoard" method ="POST">
 			 <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" class="form-control" id="title" name="title" required>
@@ -63,7 +62,7 @@ $(document).ready(function(){
             </div>
              <div class="form-group">
                 <label for="usingOption">사용 여부</label>
-                <select class="form-control" id="isDeletedOption;" name="isDeletedOption;">
+                <select class="form-control" id="isDeletedOption" name="isDeletedOption;">
                     <option value="Y">사용</option>
                     <option value="N" selected>사용하지 않음</option>
                 </select>

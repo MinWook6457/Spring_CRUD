@@ -1,5 +1,7 @@
 package com.insilicogen.CRUD_PRJ.login.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,14 +14,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.insilicogen.CRUD_PRJ.bbs.service.Board;
+import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardService;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 import com.insilicogen.CRUD_PRJ.user.service.VO.UserLoginVo;
 import com.insilicogen.CRUD_PRJ.user.service.dto.UserDto;
 
 @Controller
 public class WebLoginController {
+	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	@GetMapping("hello")
 	public String test(Model model) {
@@ -33,7 +41,16 @@ public class WebLoginController {
 	
 	@GetMapping("/welcome")
 	public String welcome(Model model) {
-		return "welcome";
+	    List<Board> boardList = boardService.getAllBoards();
+		
+	    if (boardList.isEmpty()) {
+	        String message = "게시글이 없습니다.";
+	        model.addAttribute("message", message);
+	        return "/welcome";
+	    } else {
+	        model.addAttribute("boardList", boardList);
+	        return "/welcome";
+	    }
 	}
 
 	@PostMapping("/home/login")

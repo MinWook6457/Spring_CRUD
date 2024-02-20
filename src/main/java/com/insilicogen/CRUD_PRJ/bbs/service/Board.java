@@ -64,5 +64,5 @@ public class Board extends BaseEntity{
 	
     @ManyToOne
     @JoinColumn(name = "USER_SN")
-    private User userSn;
+    private User user;
 }

@@ -1,6 +1,7 @@
 package com.insilicogen.CRUD_PRJ.user.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size; // Hibernate Validator 인터페이스 : jakarta
@@ -53,5 +57,6 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "PSWD_HINT_SN")
     private PSWD_HINT pswdHintSn;
+  
 
 }

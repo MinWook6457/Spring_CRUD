@@ -15,5 +15,16 @@ public class BoardRequestDto {
 	private char priorityPostingOption;
 	private char usingOption;
 	private char isDeletedOption;
-	private UserDto userDto;
+	private String userLoginId;
+
+	public BoardRequestDto(String boardTitle, String boardContent, 
+			char priorityPostingOption, char usingOption,
+			char isDeletedOption, String userLoginId) {
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.priorityPostingOption = priorityPostingOption;
+		this.usingOption = usingOption;
+		this.isDeletedOption = isDeletedOption;
+		this.userLoginId = userLoginId;
+	}
 }
