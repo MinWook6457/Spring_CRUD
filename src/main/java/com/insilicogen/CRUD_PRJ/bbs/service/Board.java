@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.insilicogen.CRUD_PRJ.user.service.User;
@@ -65,4 +66,9 @@ public class Board extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "USER_SN")
     private User user;
+    
+	@Transient
+	private int pageNo;
+	@Transient
+	private int pageUnit;
 }

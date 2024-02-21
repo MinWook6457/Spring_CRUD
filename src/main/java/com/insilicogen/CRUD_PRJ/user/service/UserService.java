@@ -122,11 +122,9 @@ public class UserService {
 			user.setPassword(newPassword);
 			System.out.println("디비에 넣을 비밀번호 " + user.getPassword());
 			userRepository.saveAndFlush(user); // 변경된 엔티티를 즉시 저장
-			System.out.println(userRepository.saveAndFlush(user));
-			return true;
-		} else {
-			return false; // 사용자가 존재하지 않는 경우
+			System.out.println(userRepository.saveAndFlush(user));	
 		}
+		return true;
 	}
 	
 	public void saveUser(User user) {

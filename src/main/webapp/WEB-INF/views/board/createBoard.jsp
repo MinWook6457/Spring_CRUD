@@ -13,7 +13,7 @@ $(document).ready(function(){
             boardContent: $('#content').val(),
             priorityPostingOption: $('#priorityPostingOption').val(),
             usingOption: $('#usingOption').val(),
-            isDeletedOption: $('#isDeletedOption').val(),
+            isDeletedOption: "N", // Default => N
             userLoginId: '${sessionScope.loginUser.userLoginId}'
         };
 
@@ -54,17 +54,10 @@ $(document).ready(function(){
                 </select>
             </div>
             <div class="form-group">
-                <label for="usingOption">게시 여부</label>
-                <select class="form-control" id="usingOption" name="usingOption">
-                    <option value="Y">사용</option>
-                    <option value="N" selected>사용하지 않음</option>
-                </select>
-            </div>
-             <div class="form-group">
                 <label for="usingOption">사용 여부</label>
-                <select class="form-control" id="isDeletedOption" name="isDeletedOption;">
-                    <option value="Y">사용</option>
-                    <option value="N" selected>사용하지 않음</option>
+                <select class="form-control" id="usingOption" name="usingOption">
+                    <option value="Y" selected>사용</option>
+                    <option value="N">사용하지 않음</option>
                 </select>
             </div>
             <div class="form-group">
