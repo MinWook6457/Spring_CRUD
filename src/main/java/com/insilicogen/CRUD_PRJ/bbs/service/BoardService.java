@@ -47,7 +47,7 @@ public class BoardService {
 
 	public Page<Board> getPagedBoard(int page, int pageSize) {
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
-		return boardRepository.findPagedBoardList(pageable);
+		return boardRepository.findUsingOptionYOrderByPriorityAndCreatedAtDesc(pageable);
 	}
 
 	

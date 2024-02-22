@@ -102,6 +102,7 @@ public class BoardController {
 		
 		
 		board.setIsDeletedOption('Y');
+		board.setUsingOption('N');
 		boardRepository.saveAndFlush(board); // 변경된 엔티티를 즉시 저장
 
 		return ResponseEntity.status(HttpStatus.OK).body("게시글 삭제 완료");

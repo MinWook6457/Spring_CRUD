@@ -31,6 +31,8 @@
 				var html = '';
 				
 				$("#boardTableBody").empty();
+				
+				var viewLength = list.length;
 		
 				if(list.length == 0) {
 					html += '<tr>';
@@ -43,7 +45,11 @@
 					var createdAt = new Date(list[i].createdAt); 
 					var date = createdAt.getFullYear() + '년 ' + (createdAt.getMonth()+1) + '월 ' + createdAt.getDate() + '일';
 					html += '<tr>';
-				    html += 	'<td>' + list[i].boardSn + '</td>'
+					if(list[i].priorityPostingOption == 'Y'){
+				  	  html += 	'<td>' + '<span class = "badge bg-info text-dark">' + '공지' + '</span>' + '</td>'
+					}else{
+					  html += 	'<td>' + (i + 1) + '</td>'
+					}
 				    html += 	'<td><a href="/board/read/' + list[i].boardSn + '">' + list[i].boardTitle + '</a></td>'
 				    html += 	'<td>' + list[i].user.userNm + '</td>'
 				    html += 	'<td>' + date + '</td>'
@@ -52,6 +58,8 @@
 				    html += 		'<button class="btn btn-outline-primary" onclick="fnUpdateBoard('+list[i].boardSn+');">수정</button>' // 닫는 태그 변경
 				    html += '</td>'
 				    html += '</tr>'
+					}else{
+						viewLength--;
 					}
 				}
 				
@@ -132,7 +140,7 @@
 	console.log("총 페이지 넘버 : " + totalPageNo);
 	
 	var before = Math.max(firstPageNo - 1, 1); // 이전 페이지
-	var after = Math.min(lastPageNo + 1, totalPages + 1); // 다음 페이지
+	var after = Math.min(lastPageNo + 1, totalElements + 1); // 다음 페이지
 	
 	var html = '<ul class="pagination">'; // html 생성
 	if(pageNo > pageUnit) { // 첫 페이지
@@ -170,9 +178,10 @@
 <body>
 	<div class="container text-center mt-5">
 		<h3>${sessionScope.loginUser.userNm}님</h3>
-		<div class="float-right mb-3">
-			<input type="button" class="btn btn-primary" id="createBoardBtn"
-				value="글쓰기" onclick="location.href='/board/createBoard';">
+		<div class="row">
+			<div class="col-sm-12 text-lg-start text-right">
+				<input type="button" class="btn btn-primary" style="float:right;" id="createBoardBtn" value="글쓰기" onclick="location.href='/board/createBoard';">
+			</div>
 		</div>
 		<div class="table-responsive">
 			<table class="table">

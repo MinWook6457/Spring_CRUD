@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="../resources/js/jquery/jquery-3.7.1.js"></script>
-<script src="../resources/js/jquery/jquery.validate.js"></script>
+<jsp:include page="../common/include.jsp" />
 
 
 <title>회원가입 폼</title>
 
 <script>
 $(document).ready(function() {
+	$(function() {
+	    $("#birth").datepicker();
+	});
+	
     $('#registerForm').validate({
         rules: {
             userLoginId: {
@@ -58,27 +61,6 @@ $(document).ready(function() {
         	   console.log("이거 안 됨 ㅋㅋ");
         }
     });
-    
-    // 중복 아이디 검사 
-    $('#login_id').blur(function() { // 입력 필드에 포커스가 사라질 때마다 해당 함수 내의 코드를 실행하도록 설정
-        var loginId = $(this).val(); // 입력된 아이디 값
-        var password = $('#password').val(); // 비밀번호 값
-        $.post('/user/checkDuplicateId', { userLoginId: loginId }, function(duplicateResponse) {
-            $.post('/user/checkPassWord', { password: password }, function(passwordResponse) {
-                if (!duplicateResponse || !passwordResponse) {
-                    $('#submitBtn').prop('disabled', true); // 가입 버튼 비활성화
-                } else {
-                    $('#submitBtn').prop('disabled', false); // 가입 버튼 활성화
-                }
-            });
-        });
-    });
-
-
-
-    
-    
-
     $('#submitBtn').click(function(event) {
         event.preventDefault(); 
         if ($('#registerForm').valid()) {
@@ -111,8 +93,6 @@ $(document).ready(function() {
                 data: JSON.stringify(formData),
                 success: function(response) {
                     console.log(response);
-         			
-                    
                     alert('회원가입이 완료되었습니다.');
                     location.href = '/home';
                 },
@@ -127,29 +107,158 @@ $(document).ready(function() {
 
 </script>
 
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-<h2>회원가입 폼</h2>
-<form id="registerForm" method="POST">
-	<label for="login_id">로그인 ID:</label> <input type="text" id="login_id" name="userLoginId" required> 
-	<br><br> 
-	<label for="user_name">사용자 이름:</label> <input type="text" id="user_name" name="userNm" required> 
-	<br><br> 
-	<label for="password">비밀번호:</label> <input type="password" id="password" name="password" required>
-	<br><br> 
-	<label for="sex">성별:</label> <select id="sex" name="sex">
-		<option value="M">남성</option>
-		<option value="F">여성</option>
-	</select> 
-	<br><br> 
-	<label for="birth">생년월일:</label> <input type="date" id="birth" name="dateOfBirth" required>
-	<br><br> 
-	<select id="hint_question" name="hintQuestion">
-    <c:forEach var="hintQuestion" items="${hintQuestions}" >
-        <option value="${hintQuestion.pswdHintSn} , ${hintQuestion.hintCn}">${hintQuestion.hintCn}</option>
-    </c:forEach>
-	</select>
-	<br><br> 
-	<label for="hint_comment">비밀번호 힌트 답변 : </label> <input type="text" id="hint_comment" name="hintAnswer"> 
-	<br><br> <!-- <input type="submit" value="가입하기"> -->
- 	<input type="button" id="submitBtn" value="가입하기">
- </form>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+      
+      .storm {
+       	display: inline-block;
+        text-align: center;
+      }
+      
+      .form-label {
+        margin-bottom: 0.5rem; /* 텍스트 입력란 위 간격 조절 */
+  	  }
+</style>
+
+<body class="bg-body-tertiary">
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="/resources/image/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <h2>회원가입</h2>
+    </div>
+    <div class="row g-6">
+      <div class="col-md-12 col-lg-12">
+        <h4 class="mb-3">모든 정보를 입력해주세요!</h4>
+        <form class="row g-3 needs-validation" novalidate id="registerForm" method="POST">
+           	<div class="row g-2">
+            	<div class="col-sm-4">
+             		 <label for="login_id" class="form-label">Input Login ID</label>
+             		 <input type="text" class="form-control" id="login_id" required>
+            	</div>
+
+            	<div class="col-sm-4">
+             		 <label for="user_name" class="form-label">UserName</label>
+               		 <input type="text" class="form-control" id="user_name">
+           		</div>
+
+            	<div class="col-sm-4">
+              		 <label for="password" class="form-label">PassWord</label>
+              		 <input type="password" class="form-control" id="password">
+           		 </div>
+            
+           		 <div class="col-sm-2 mt-3">
+              	     <label for="sex" class="form-label">회원 성별 설정</label>
+            		 	<select id="sex" class ="form-select" name="sex">
+               				<option value="">성별</option>
+               					<option>M</option>
+               					<option>F</option>
+              			</select>
+           		 </div>
+
+          		  <div class="col-sm-4 mt-3">
+              	  	  <label for="hint_question" class="form-label">비밀번호 힌트 설정</label>
+              	     	<select id="hint_question" class ="form-select" name="hintQuestion">
+              	     		<option value="">힌트 질문 선택</option>
+  							<c:forEach var="hintQuestion" items="${hintQuestions}" >
+    	  						  <option value="${hintQuestion.pswdHintSn} , ${hintQuestion.hintCn}">${hintQuestion.hintCn}</option>
+    						</c:forEach>
+						</select>
+				  </div>
+           
+            	  <div class="col-sm-3 mt-3">
+              		   <label for="hint_comment" class="form-label">질문 답변</label>
+              		   <input type="text" class="form-control" id="hint_comment">
+           		  </div>  
+           		  
+           		  <div class="col-sm-3 mt-3">
+   				 		<label for="birth" class="form-label">생년월일</label>
+						<input type="text" id="birth" class="form-control" value="2000-01-01" />
+				 </div>
+				 <div class = "row-6 mt-3">
+						<div class="col text-center">
+							<button class="btn btn-outline-primary" type="button">가입하기</button>	
+						</div>
+					</div>	
+				 </div>
+				</form>
+      			</div>
+			</div>
+ 		</main>
+ 	</div>
+ </body>

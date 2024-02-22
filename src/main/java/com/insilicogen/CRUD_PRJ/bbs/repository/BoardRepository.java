@@ -14,7 +14,10 @@ import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 	Optional<Board> findByboardSn(Integer boardSn);
 	
-	@Query("SELECT n FROM Board n")
-	Page<Board> findPagedBoardList(Pageable pageable);
+	 @Query("SELECT b FROM Board b WHERE b.usingOption = 'Y' "
+	 		+ "ORDER BY b.priorityPostingOption DESC,"
+	 		+ "b.createdAt DESC")
+	 Page<Board> findUsingOptionYOrderByPriorityAndCreatedAtDesc(Pageable pageable);
 }
+
 
