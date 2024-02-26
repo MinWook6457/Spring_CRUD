@@ -10,3 +10,13 @@
 |공지사항 게시글 통계 기능 | -게시글의 등록일시에 따른 결과를 시각화 하여 표시하도록 구현<br>-첨부파일 통계(확장자 별 크기)를 시각화 하여 표시하도록 구현<br>-조회수와 댓글 수에 따른 결과를 시각화 하여 표시하도록 구현 |❍Chart.js|
 ### 데이터 베이스 설계
 ![image](https://github.com/MinWook6457/Spring_CRUD/assets/103114126/a73a7208-846a-4b88-9f09-1bba8380e1ea)
+
+### 로그인
+![image](https://github.com/MinWook6457/Spring_CRUD/assets/103114126/5f8babb7-04a1-44d3-ac4a-0496544c7e9c)
+
+### 로그인 후 초기화면(게시판)
+![image](https://github.com/MinWook6457/Spring_CRUD/assets/103114126/7c354ba6-865f-47c5-8566-9ce60a5be6b2)
+
+### 회원가입
+![image](https://github.com/MinWook6457/Spring_CRUD/assets/103114126/94c12fb1-fb08-4303-9bf2-5da8627b8279)
+
