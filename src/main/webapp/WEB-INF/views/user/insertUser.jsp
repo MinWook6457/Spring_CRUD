@@ -9,7 +9,9 @@
 <script>
 $(document).ready(function() {
 	$(function() {
-	    $("#birth").datepicker();
+	    $("#birth").datepicker({
+	    	format: 'yyyy-mm-dd'
+	    });
 	});
 	
     $('#registerForm').validate({
@@ -205,7 +207,7 @@ $(document).ready(function() {
     <div class="row g-6">
       <div class="col-md-12 col-lg-12">
         <h4 class="mb-3">모든 정보를 입력해주세요!</h4>
-        <form class="row g-3 needs-validation" novalidate id="registerForm" method="POST">
+        <form class="row g-3 needs-validation" novalidate id="registerForm"  method="POST">
            	<div class="row g-2">
             	<div class="col-sm-4">
              		 <label for="login_id" class="form-label">Input Login ID</label>
@@ -218,7 +220,7 @@ $(document).ready(function() {
            		</div>
 
             	<div class="col-sm-4">
-              		 <label for="password" class="form-label">PassWord</label>
+              		 <label for="password" class="form-label">Password</label>
               		 <input type="password" class="form-control" id="password">
            		 </div>
             
@@ -252,7 +254,7 @@ $(document).ready(function() {
 				 </div>
 				 <div class = "row-6 mt-3">
 						<div class="col text-center">
-							<button class="btn btn-outline-primary" type="button">가입하기</button>	
+							<button class="btn btn-outline-primary" id=submitBtn type="button">가입하기</button>	
 						</div>
 					</div>	
 				 </div>

@@ -122,11 +122,11 @@
 
     <div class="form-floating">
       <input type="text" class="form-control" id="user_lgn_id" name="userLoginId" required autofocus placeholder="아이디">
-      <label for="floatingInput">Email address</label>
+      <label for="floatingInput">로그인 아이디</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="user_pw" name="userPassword" required placeholder="비밀번호">
-      <label for="floatingPassword">Password</label>
+      <label for="floatingPassword">비밀번호</label>
     </div>
     
     <!-- <body>
@@ -139,13 +139,6 @@
         <input type="button" id="findPwBtn" value="비밀번호 찾기"  onclick="redirectToFindUserInfo();">
     </form>
 </body>  -->
-
-    <div class="form-check text-start my-3">
-      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Remember me
-      </label>
-    </div>
     <button class="btn btn-dark w-100 py-2 mb-5" type="submit" id="loginBtn">로그인</button>
     <button class="btn btn-primary w-100 py-2 mb-1" type="button" id="registerBtn" onclick="window.location.href='/user/insertUser.do';">회원가입</button>
     <button class="btn btn-outline-primary w-100 py-2" type="button" id="findPwBtn" onclick="redirectToFindUserInfo();">비밀번호 찾기</button>
