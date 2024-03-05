@@ -36,7 +36,7 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
-		<hi class="mt-5"> 글 쓰기 페이지 </hi>
+		<h1 class="mt-5"> 글 쓰기 페이지 </h1>
 		<form id = "writeBoard" method ="POST">
 			 <div class="form-group">
                 <label for="title">제목</label>

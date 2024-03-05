@@ -19,7 +19,7 @@
 	function selectBoardList(pageNo) {		
 		var param = {
 			pageNo : pageNo,
-			pageUnit : 5
+			pageUnit : 10
 		}
 		$.ajax({
 			type : "POST",

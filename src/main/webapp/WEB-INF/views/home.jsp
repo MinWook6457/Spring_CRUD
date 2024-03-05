@@ -2,6 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="common/include.jsp"/>
+
+<%
+	String title = "test";
+	System.out.println("안녕");
+%>
+
 <style>
   .bd-placeholder-img {
     font-size: 1.125rem;

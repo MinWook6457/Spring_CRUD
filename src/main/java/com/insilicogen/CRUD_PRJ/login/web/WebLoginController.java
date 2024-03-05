@@ -1,7 +1,5 @@
 package com.insilicogen.CRUD_PRJ.login.web;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 import com.insilicogen.CRUD_PRJ.bbs.service.BoardService;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 import com.insilicogen.CRUD_PRJ.user.service.VO.UserLoginVo;
@@ -33,9 +30,18 @@ public class WebLoginController {
 	public String test(Model model) {
 		return "hello";
 	}
-
+	/*
 	@GetMapping("/home")
-	public String home(Model model) { // 홈 페이지
+	public ModelAndView home(ModelAndView model) { // 홈 페이지
+		model.setViewName("home");
+		
+		return model;
+	//	return "home";
+	}
+	*/
+	
+	@GetMapping("/home")
+	public String home() { // 홈 페이지
 		return "home";
 	}
 	

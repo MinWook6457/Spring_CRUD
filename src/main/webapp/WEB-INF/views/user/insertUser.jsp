@@ -107,6 +107,26 @@ $(document).ready(function() {
     });
 });
 
+(function () {
+	  'use strict'
+
+	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+	  var forms = document.querySelectorAll('.needs-validation')
+
+	  // Loop over them and prevent submission
+	  Array.prototype.slice.call(forms)
+	    .forEach(function (form) {
+	      form.addEventListener('submit', function (event) {
+	        if (!form.checkValidity()) {
+	          event.preventDefault()
+	          event.stopPropagation()
+	        }
+
+	        form.classList.add('was-validated')
+	      }, false)
+	    })
+	})()
+
 </script>
 
 <style>
@@ -207,11 +227,14 @@ $(document).ready(function() {
     <div class="row g-6">
       <div class="col-md-12 col-lg-12">
         <h4 class="mb-3">모든 정보를 입력해주세요!</h4>
-        <form class="row g-3 needs-validation" novalidate id="registerForm"  method="POST">
+        <form class="row g-3 needs-validation" novalidate="" id="registerForm"  method="POST">
            	<div class="row g-2">
             	<div class="col-sm-4">
              		 <label for="login_id" class="form-label">Input Login ID</label>
-             		 <input type="text" class="form-control" id="login_id" required>
+             		 <input type="text" class="form-control" id="login_id" placeholder="아이디" required="" minlength="4">
+             		 <div class="invalid-feedback">
+    				 아이디는 2자 이상!
+    				 </div>
             	</div>
 
             	<div class="col-sm-4">
@@ -221,7 +244,11 @@ $(document).ready(function() {
 
             	<div class="col-sm-4">
               		 <label for="password" class="form-label">Password</label>
-              		 <input type="password" class="form-control" id="password">
+              		 <input type="password" class="form-control" id="password" placeholder="비밀번호" pattern="^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$">
+           		 	 
+           		 	 <div class="invalid-feedback">
+    				  비밀번호는 특수문자,영어,숫자 포함 8글자 이상입니다.
+    				  </div>
            		 </div>
             
            		 <div class="col-sm-2 mt-3">

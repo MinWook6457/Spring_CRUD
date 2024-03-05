@@ -10,14 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 
-@Repository
+
 public interface BoardRepository extends JpaRepository<Board, Long> {
 	Optional<Board> findByboardSn(Integer boardSn);
-	
-	 @Query("SELECT b FROM Board b WHERE b.usingOption = 'Y' "
-	 		+ "ORDER BY b.priorityPostingOption DESC,"
-	 		+ "b.createdAt DESC")
-	 Page<Board> findUsingOptionYOrderByPriorityAndCreatedAtDesc(Pageable pageable);
+
+	@Query("SELECT b FROM Board b WHERE b.usingOption = 'Y' " + "ORDER BY b.priorityPostingOption DESC,"
+			+ "b.createdAt DESC")
+	Page<Board> findUsingOptionYOrderByPriorityAndCreatedAtDesc(Pageable pageable);
 }
-
-
