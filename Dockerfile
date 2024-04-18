@@ -1,7 +1,7 @@
 # Base Image
 FROM openjdk:17
 
-ADD target/MW.jar /MW.jar
+ADD /target/MW.war /MW.war
 
 EXPOSE 8080
 
