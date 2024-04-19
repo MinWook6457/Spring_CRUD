@@ -1,11 +1,16 @@
-# Base image for Spring Boot application
-FROM openjdk:17
+# docker 안에 tomcat 9.0 및 jdk 17 설정
+FROM openjdk:17-alpine
 
-# Add the Spring Boot JAR file
-ADD /target/MW.jar /MW.jar
+RUN apk update && apk add --no-cache curl tar bash
 
-# Expose port
+RUN curl -O https://downloads.apache.org/tomcat/tomcat-9/v9.0.88/bin/apache-tomcat-9.0.88.tar.gz && \
+    tar -xzf apache-tomcat-9.0.88.tar.gz && \
+    mv apache-tomcat-9.0.88 /usr/local/tomcat && \
+    rm apache-tomcat-9.0.88.tar.gz
+
+
 EXPOSE 8080
 
-# Command to run the Spring Boot JAR file
-ENTRYPOINT ["java","-jar","/MW.jar"]
+COPY /target/MW.war /usr/local/tomcat/webapps/ROOT.war
+
+CMD ["java", "-jar", "/usr/local/tomcat/webapps/ROOT.war"]
