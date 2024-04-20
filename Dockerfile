@@ -1,7 +1,7 @@
-FROM openjdk:17-alpine
+FROM tomcat:9.0
 
-WORKDIR /app
+COPY target/MW.war /usr/local/tomcat/webapps/ROOT.war
 
-COPY target/MW.war MW.war
+EXPOSE 8080
 
-CMD ["java", "-jar", "MW.war"]
+CMD ["catalina.sh", "run"]

@@ -77,6 +77,20 @@
 			<version>1.2</version>
 		</dependency>
 		
+		<dependency>
+   			<groupId>javax.servlet</groupId>
+  			<artifactId>javax.servlet-api</artifactId>
+   			<version>4.0.1</version> 
+   			<scope>provided</scope> <!-- 컨테이너에서 제공되므로 provided 스코프를 사용합니다 -->
+		</dependency>
+
+		
+		<dependency>
+  			 <groupId>org.apache.tomcat.embed</groupId>
+   			 <artifactId>tomcat-embed-jasper</artifactId>
+			 <version>10.1.19</version>
+   			 <scope>provided</scope>
+		</dependency>
 		
 		<!-- Hibernate Validator 추가 -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
