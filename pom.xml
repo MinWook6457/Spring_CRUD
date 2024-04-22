@@ -81,7 +81,7 @@
    			<groupId>javax.servlet</groupId>
   			<artifactId>javax.servlet-api</artifactId>
    			<version>4.0.1</version> 
-   			<scope>provided</scope> <!-- 컨테이너에서 제공되므로 provided 스코프를 사용합니다 -->
+   			<scope>provided</scope> <!-- 컨테이너에서 제공되므로 provided 스코프를 사용 -->
 		</dependency>
 
 		
