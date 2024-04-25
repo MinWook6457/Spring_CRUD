@@ -1,6 +1,6 @@
 services:
   was:
-    image: tomcat:9.0
+    image: tomcat:9.0.55-jdk17
     container_name: mw-app
     ports:
       - "8080:8080"
@@ -22,6 +22,8 @@ services:
       POSTGRES_DB: bs
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
+    ports :
+      - "5432:5432"
     networks:
       - minwook-net
       
