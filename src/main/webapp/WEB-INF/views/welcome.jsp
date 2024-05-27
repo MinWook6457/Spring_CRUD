@@ -180,7 +180,7 @@
 		<h3>${sessionScope.loginUser.userNm}님</h3>
 		<div class="row">
 			<div class="col-sm-12 text-lg-start text-right">
-				<input type="button" class="btn btn-primary" style="float:right;" id="createBoardBtn" value="글쓰기" onclick="location.href='/board/createBoard';">
+				<input type="button" class="btn btn-primary" style="float:right;" id="createBoardBtn" value="글쓰기" onclick="location.href='/board/createBoard'">
 			</div>
 		</div>
 		<div class="table-responsive">

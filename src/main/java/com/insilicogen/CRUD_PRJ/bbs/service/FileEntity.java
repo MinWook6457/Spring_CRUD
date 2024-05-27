@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Table(name = "BBS_ATCH_FILE")
-public class File extends BaseEntity{
+public class FileEntity extends BaseEntity{
     /* 파일 테이블 기본 키 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,8 @@ public class File extends BaseEntity{
 
     /* 파일 크기*/
     @Column(name = "ATCH_FILE_SZ")
-    @NotNull
-    private Integer fileSize;
+    @Lob
+    private byte[] fileSize;
 
     @Column(name = "ATCH_FILE_PATH", length = 255)
     @NotNull
@@ -43,6 +43,6 @@ public class File extends BaseEntity{
     }
 
     @ManyToOne
-    @JoinColumn(name = "BBS_SN")
+    @JoinColumn(name="BOARD_SN")
     private Board board;
 }
