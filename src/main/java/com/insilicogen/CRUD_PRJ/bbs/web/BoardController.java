@@ -8,6 +8,7 @@ import com.insilicogen.CRUD_PRJ.bbs.repository.FileRepository;
 import com.insilicogen.CRUD_PRJ.bbs.service.BoardService;
 import com.insilicogen.CRUD_PRJ.bbs.service.FileEntity;
 import com.insilicogen.CRUD_PRJ.bbs.service.FileService;
+import com.insilicogen.CRUD_PRJ.bbs.service.dao.BoardPageNationDAO;
 import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardPageNationDTO;
 import com.insilicogen.CRUD_PRJ.bbs.service.dto.FileUploadResultDTO;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
@@ -57,7 +58,7 @@ public class BoardController {
 
 	@PostMapping("/board/selectBoardList")
 	@ResponseBody
-	public Page<Board> selectBoardList(@RequestBody Board board) {
+	public Page<BoardPageNationDAO> selectBoardList(@RequestBody Board board) {
 		return boardService.getPagedBoard(board.getPageNo(), board.getPageUnit());
 	}
 
@@ -178,9 +179,5 @@ public class BoardController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("글 수정 중 오류가 발생했습니다.");
 		}
-	}
-
-	public static int byteArrayToInt(byte[] bytes) {
-		return ByteBuffer.wrap(bytes).getInt();
 	}
 }

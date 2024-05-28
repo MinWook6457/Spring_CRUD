@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import com.insilicogen.CRUD_PRJ.bbs.service.dao.BoardPageNationDAO;
 import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardPageNationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,7 +48,7 @@ public class BoardService {
 		}
 	}
 
-	public Page<Board> getPagedBoard(int page, int pageSize) {
+	public Page<BoardPageNationDAO> getPagedBoard(int page, int pageSize) {
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
 		return boardRepository.findUsingOptionYOrderByPriorityAndCreatedAtDesc(pageable);
 	}
