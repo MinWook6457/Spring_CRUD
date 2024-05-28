@@ -19,7 +19,7 @@ import java.util.List;
 public class Board extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer boardSn;
+	private Long boardSn;
 
 	@Column(name = "BBS_TTL", length = 255)
 	@NotNull
@@ -56,7 +56,7 @@ public class Board extends BaseEntity {
 	@JoinColumn(name = "USER_SN")
 	private User user;
 
-	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL) // 파일 엔터티와 일대다 관계 설정
+	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
 	private List<FileEntity> files;
 
 	@Transient

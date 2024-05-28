@@ -2,9 +2,11 @@ package com.insilicogen.CRUD_PRJ.bbs.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardPageNationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,6 +51,13 @@ public class BoardService {
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
 		return boardRepository.findUsingOptionYOrderByPriorityAndCreatedAtDesc(pageable);
 	}
+
+//	public List<BoardPageNationDTO> getPagedBoard1(String opinion, PageRequest pageRequest) {
+//		return boardRepository.findUsingOptionAndOrderByPriorityPostingOptionDescCreatedAtDesc(opinion,pageRequest)
+//				.stream()
+//				.map(BoardPageNationDTO::new)
+//				.collect(Collectors.toList());
+//	}
 
 	
 }

@@ -1,5 +1,6 @@
 package com.insilicogen.CRUD_PRJ.bbs.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -17,4 +18,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 	@Query("SELECT b FROM Board b WHERE b.usingOption = 'Y' " + "ORDER BY b.priorityPostingOption DESC,"
 			+ "b.createdAt DESC")
 	Page<Board> findUsingOptionYOrderByPriorityAndCreatedAtDesc(Pageable pageable);
+
+//	List<Board> findUsingOptionAndOrderByPriorityPostingOptionDescCreatedAtDesc(
+//			String usingOption, Pageable pageable);
 }

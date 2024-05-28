@@ -1,19 +1,20 @@
 package com.insilicogen.CRUD_PRJ.bbs.web;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import com.insilicogen.CRUD_PRJ.bbs.repository.FileRepository;
 import com.insilicogen.CRUD_PRJ.bbs.service.BoardService;
 import com.insilicogen.CRUD_PRJ.bbs.service.FileEntity;
+import com.insilicogen.CRUD_PRJ.bbs.service.FileService;
+import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardPageNationDTO;
+import com.insilicogen.CRUD_PRJ.bbs.service.dto.FileUploadResultDTO;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.insilicogen.CRUD_PRJ.bbs.repository.BoardRepository;
 import com.insilicogen.CRUD_PRJ.bbs.service.Board;
-import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardRequestDTO;
 import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardUpdatingDTO;
 import com.insilicogen.CRUD_PRJ.user.service.User;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +47,9 @@ public class BoardController {
 	@Autowired
 	private UserService userService;
 
+    @Autowired
+    private FileService fileService;
+
 	@GetMapping("/board/createBoard")
 	public String createBoard(Model model) {
 		return "/board/createBoard";
@@ -59,30 +61,36 @@ public class BoardController {
 		return boardService.getPagedBoard(board.getPageNo(), board.getPageUnit());
 	}
 
+//	@PostMapping("/board/selectBoardList1")
+//	@ResponseBody
+//	public List<BoardPageNationDTO> selectBoardList1(@RequestBody Board board) {
+//		return boardService.getPagedBoard1(String.valueOf(board.getPriorityPostingOption()),getPageRequest(board.getPageNo(),board.getPageUnit()));
+//	}
+//
+//	public PageRequest getPageRequest(int page, int size) {
+//		return PageRequest.of(page, size);
+//	}
+
+	/*
+	*  RequestPart : HTTP request body에 multipart/form-data 가 포함되어 있는 경우에 사용하는 어노테이션
+	* */
 	@PostMapping("/board/writeBoard")
 	@ResponseBody
-	public ResponseEntity<String> writeBoard(@ModelAttribute BoardRequestDTO boardRequestDto) {
+	public ResponseEntity<String> writeBoard( @RequestParam("boardTitle") String boardTitle,
+											  @RequestParam("boardContent") String boardContent,
+											  @RequestParam("priorityPostingOption") char priorityPostingOption,
+											  @RequestParam("usingOption") char usingOption,
+											  @RequestParam("isDeletedOption") char isDeletedOption,
+											  @RequestParam("userLoginId") String userLoginId,
+											  @RequestParam("file") MultipartFile[] files) { //
 		System.out.println("글 작성 컨트롤러 진입");
 		try {
-			String boardTitle = boardRequestDto.getBoardTitle();
-			String boardContent = boardRequestDto.getBoardContent();
-			char priorityPostingOption = boardRequestDto.getPriorityPostingOption();
-			char usingOption = boardRequestDto.getUsingOption();
-			char isDeletedOption = boardRequestDto.getIsDeletedOption();
 			LocalDateTime createdAt = LocalDateTime.now();
 			LocalDateTime updatedAt = LocalDateTime.now();
 
-			User user = userService.getUserByLoginId(boardRequestDto.getUserLoginId());
+			User user = userService.getUserByLoginId(userLoginId);
 			if (user == null) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user login ID.");
-			}
-
-			List<FileEntity> fileEntities = new ArrayList<>();
-			for (MultipartFile file : boardRequestDto.getFiles()) {
-				FileEntity fileEntity = new FileEntity();
-				fileEntity.setFileName(file.getOriginalFilename());
-				fileEntity.setFileSize(file.getBytes());
-				fileEntities.add(fileEntity);
 			}
 
 			Board board = new Board();
@@ -94,9 +102,27 @@ public class BoardController {
 			board.setCreatedAt(createdAt);
 			board.setUpdatedAt(updatedAt);
 			board.setUser(user);
-			board.setFiles(fileEntities);
 
+			List <FileEntity> fileEntities = new ArrayList<>();
+			for(MultipartFile file : files){
+
+				FileUploadResultDTO fileUploadResultDTO = new FileUploadResultDTO(
+						file.getOriginalFilename(),
+						file.getBytes()
+				);
+
+				FileEntity fileEntity = new FileEntity();
+				fileEntity.setFileName(fileUploadResultDTO.getUploadFileName());
+				fileEntity.setFileSize(fileUploadResultDTO.getUploadFileSize());
+				fileEntity.setFilePath("path/to/save/" + file.getOriginalFilename());
+				fileEntity.setCreatedAt(createdAt);
+				fileEntity.setUpdatedAt(updatedAt);
+				fileEntity.setBoard(board);
+
+				fileEntities.add(fileEntity);
+			}
 			boardService.saveBoard(board);
+			fileService.saveAllFiles(fileEntities);
 
 			return ResponseEntity.ok("글 작성이 완료되었습니다.");
 		} catch (IOException  e) {
@@ -147,9 +173,14 @@ public class BoardController {
 
 			boardRepository.saveAndFlush(board); // 변경된 엔티티를 즉시 저장
 
+
 			return ResponseEntity.ok("글 수정 완료.");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("글 수정 중 오류가 발생했습니다.");
 		}
+	}
+
+	public static int byteArrayToInt(byte[] bytes) {
+		return ByteBuffer.wrap(bytes).getInt();
 	}
 }

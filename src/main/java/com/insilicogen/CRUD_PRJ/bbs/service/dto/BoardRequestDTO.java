@@ -16,20 +16,15 @@ public class BoardRequestDTO {
 	private char usingOption;
 	private char isDeletedOption;
 	private String userLoginId;
-	private MultipartFile [] files;
-
-
 
 	public BoardRequestDTO(String boardTitle, String boardContent, 
 			char priorityPostingOption, char usingOption,
-			char isDeletedOption, String userLoginId,
-			MultipartFile []files, String uploadFilePath, String uploadFileName) {
+			char isDeletedOption, String userLoginId) {
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.priorityPostingOption = priorityPostingOption;
 		this.usingOption = usingOption;
 		this.isDeletedOption = isDeletedOption;
 		this.userLoginId = userLoginId;
-		this.files = files;
 	}
 }
