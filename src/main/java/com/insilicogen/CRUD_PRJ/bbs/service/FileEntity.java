@@ -42,7 +42,7 @@ public class FileEntity extends BaseEntity {
         this.deletedAt = LocalDateTime.now(); // 현재 시간을 삭제 시기로 설정
     }
 
-    @ManyToOne
+    @ManyToOne // 지연 로딩을 통해 게시판 조회 시 순환 참조 방지
     @JoinColumn(name = "BOARD_SN")
     private Board board;
 }

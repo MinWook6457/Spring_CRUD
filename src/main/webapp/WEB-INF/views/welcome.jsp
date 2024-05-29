@@ -16,10 +16,10 @@
 		*/
 	});
 	
-	function selectBoardList(pageNo) {		
+	function selectBoardList(pageNo) {
 		var param = {
 			pageNo : pageNo,
-			pageUnit : 10
+			pageSize : 10,
 		}
 		$.ajax({
 			type : "POST",
@@ -27,6 +27,7 @@
 			contentType : "application/json;",
 			data : JSON.stringify(param),
 			success : function(res) {
+				console.log(res.content);
 				var list = res.content;
 				var html = '';
 				

@@ -1,16 +1,14 @@
 package com.insilicogen.CRUD_PRJ.bbs.web;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.time.LocalDateTime;
 
 import com.insilicogen.CRUD_PRJ.bbs.repository.FileRepository;
 import com.insilicogen.CRUD_PRJ.bbs.service.BoardService;
 import com.insilicogen.CRUD_PRJ.bbs.service.FileEntity;
 import com.insilicogen.CRUD_PRJ.bbs.service.FileService;
-import com.insilicogen.CRUD_PRJ.bbs.service.dao.BoardPageNationDAO;
-import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardPageNationDTO;
 import com.insilicogen.CRUD_PRJ.bbs.service.dto.FileUploadResultDTO;
+import com.insilicogen.CRUD_PRJ.bbs.service.dto.PageRequestDTO;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +56,12 @@ public class BoardController {
 
 	@PostMapping("/board/selectBoardList")
 	@ResponseBody
-	public Page<BoardPageNationDAO> selectBoardList(@RequestBody Board board) {
-		return boardService.getPagedBoard(board.getPageNo(), board.getPageUnit());
+	public ResponseEntity<Page<Board>> selectBoardList(@RequestBody PageRequestDTO pageRequestDTO) {
+		Page<Board> boardPage = boardService.getBoardPage(pageRequestDTO);
+		return ResponseEntity.ok().body(boardPage);
 	}
+
+
 
 //	@PostMapping("/board/selectBoardList1")
 //	@ResponseBody
@@ -68,9 +69,9 @@ public class BoardController {
 //		return boardService.getPagedBoard1(String.valueOf(board.getPriorityPostingOption()),getPageRequest(board.getPageNo(),board.getPageUnit()));
 //	}
 //
-//	public PageRequest getPageRequest(int page, int size) {
-//		return PageRequest.of(page, size);
-//	}
+	public PageRequest getPageRequest(int page, int size) {
+		return PageRequest.of(page - 1, size);
+	}
 
 	/*
 	*  RequestPart : HTTP request body에 multipart/form-data 가 포함되어 있는 경우에 사용하는 어노테이션
@@ -80,7 +81,7 @@ public class BoardController {
 	public ResponseEntity<String> writeBoard( @RequestParam("boardTitle") String boardTitle,
 											  @RequestParam("boardContent") String boardContent,
 											  @RequestParam("priorityPostingOption") char priorityPostingOption,
-											  @RequestParam("usingOption") char usingOption,
+											  @RequestParam("usingOption") String usingOption,
 											  @RequestParam("isDeletedOption") char isDeletedOption,
 											  @RequestParam("userLoginId") String userLoginId,
 											  @RequestParam("file") MultipartFile[] files) { //
@@ -142,7 +143,7 @@ public class BoardController {
 	public ResponseEntity<String> deleteBoard(@PathVariable Integer boardSn, Model model) {
 		Board board = boardService.getBoardById(boardSn);
 		board.setIsDeletedOption('Y');
-		board.setUsingOption('N');
+		board.setUsingOption("N");
 		boardRepository.saveAndFlush(board); // 변경된 엔티티를 즉시 저장
 		return ResponseEntity.status(HttpStatus.OK).body("게시글 삭제 완료");
 	}
@@ -162,7 +163,7 @@ public class BoardController {
 			String boardTitle = boardUpdatingDTO.getBoardTitle();
 			String boardContent = boardUpdatingDTO.getBoardContent();
 			char priorityPostingOption = boardUpdatingDTO.getPriorityPostingOption();
-			char usingOption = boardUpdatingDTO.getUsingOption();
+			String usingOption = boardUpdatingDTO.getUsingOption();
 			LocalDateTime updatedAt = LocalDateTime.now();
 
 			Board board = boardService.getBoardById(boardSn);

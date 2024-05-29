@@ -13,12 +13,12 @@ public class BoardRequestDTO {
 	private String boardTitle;
 	private String boardContent;
 	private char priorityPostingOption;
-	private char usingOption;
+	private String usingOption;
 	private char isDeletedOption;
 	private String userLoginId;
 
 	public BoardRequestDTO(String boardTitle, String boardContent, 
-			char priorityPostingOption, char usingOption,
+			char priorityPostingOption, String usingOption,
 			char isDeletedOption, String userLoginId) {
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;

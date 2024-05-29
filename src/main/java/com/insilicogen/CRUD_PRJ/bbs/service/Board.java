@@ -1,5 +1,6 @@
 package com.insilicogen.CRUD_PRJ.bbs.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.insilicogen.CRUD_PRJ.user.service.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +37,7 @@ public class Board extends BaseEntity {
 
 	@Column(name = "USE_YN")
 	@NotNull
-	private Character usingOption;
+	private String usingOption;
 
 	@Column(name = "DEL_YN")
 	@NotNull
@@ -57,11 +58,12 @@ public class Board extends BaseEntity {
 	private User user;
 
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<FileEntity> files;
 
 	@Transient
 	private int pageNo;
 
 	@Transient
-	private int pageUnit;
+	private int pageSize;
 }

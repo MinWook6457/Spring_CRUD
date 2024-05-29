@@ -3,16 +3,15 @@ package com.insilicogen.CRUD_PRJ.bbs.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
 
-import com.insilicogen.CRUD_PRJ.bbs.service.dao.BoardPageNationDAO;
-import com.insilicogen.CRUD_PRJ.bbs.service.dto.BoardPageNationDTO;
+import com.insilicogen.CRUD_PRJ.bbs.service.dto.PageRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import com.insilicogen.CRUD_PRJ.bbs.repository.BoardRepository;
 
@@ -48,10 +47,15 @@ public class BoardService {
 		}
 	}
 
-	public Page<BoardPageNationDAO> getPagedBoard(int page, int pageSize) {
-		Pageable pageable = PageRequest.of(page - 1, pageSize);
-		return boardRepository.findUsingOptionYOrderByPriorityAndCreatedAtDesc(pageable);
+	public Page<Board> getBoardPage(PageRequestDTO pageRequestDTO) {
+		int pageNo = pageRequestDTO.getPageNo();
+		int pageSize = pageRequestDTO.getPageSize();
+
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+
+		return boardRepository.findAll(pageable);
 	}
+
 
 //	public List<BoardPageNationDTO> getPagedBoard1(String opinion, PageRequest pageRequest) {
 //		return boardRepository.findUsingOptionAndOrderByPriorityPostingOptionDescCreatedAtDesc(opinion,pageRequest)

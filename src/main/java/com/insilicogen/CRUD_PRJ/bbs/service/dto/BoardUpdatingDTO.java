@@ -10,11 +10,11 @@ public class BoardUpdatingDTO {
 	private String boardTitle;
 	private String boardContent;
 	private char priorityPostingOption;
-	private char usingOption;
+	private String usingOption;
 	private String userLoginId;
 
 	public BoardUpdatingDTO(String boardSn,String boardTitle, String boardContent, 
-			char priorityPostingOption, char usingOption,
+			char priorityPostingOption, String usingOption,
 			 String userLoginId) {
 		this.boardSn = boardSn;
 		this.boardTitle = boardTitle;
