@@ -123,9 +123,7 @@
     
 <main class="form-signin w-100 m-auto">
   <form id="loginForm" method="post" action="/home/login">
-    <img class="mb-4" src="/resources/image/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
+    <img class="mb" src="/resources/image/brand/img.png" alt="" width="298" height="150">
     <div class="form-floating">
       <input type="text" class="form-control" id="user_lgn_id" name="userLoginId" required autofocus placeholder="아이디">
       <label for="floatingInput">로그인 아이디</label>
