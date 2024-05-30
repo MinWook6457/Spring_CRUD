@@ -31,14 +31,8 @@ import java.util.List;
 
 @Controller
 public class BoardController {
-
-	private static final String UPLOAD_DIR = "uploads/";
-
 	@Autowired
 	private BoardRepository boardRepository;
-
-	@Autowired
-	private FileRepository fileRepository;
 
 	@Autowired
 	private BoardService boardService;
@@ -57,7 +51,8 @@ public class BoardController {
 	@PostMapping("/board/selectBoardList")
 	@ResponseBody
 	public ResponseEntity<Page<Board>> selectBoardList(@RequestBody PageRequestDTO pageRequestDTO) {
-		Page<Board> boardPage = boardService.getBoardPage(pageRequestDTO);
+		Page<Board> boardPage = boardService.getBoardPage("Y",pageRequestDTO);
+		System.out.println(boardPage);
 		return ResponseEntity.ok().body(boardPage);
 	}
 
@@ -133,14 +128,14 @@ public class BoardController {
 	}
 
 	@GetMapping("/board/read/{boardSn}")
-	public String readBoard(@PathVariable Integer boardSn, Model model) {
+	public String readBoard(@PathVariable Long boardSn, Model model) {
 		Board board = boardService.getBoardById(boardSn);
 		model.addAttribute("board", board);
 		return "/board/readBoard";
 	}
 
 	@DeleteMapping("/board/delete/{boardSn}")
-	public ResponseEntity<String> deleteBoard(@PathVariable Integer boardSn, Model model) {
+	public ResponseEntity<String> deleteBoard(@PathVariable Long boardSn, Model model) {
 		Board board = boardService.getBoardById(boardSn);
 		board.setIsDeletedOption('Y');
 		board.setUsingOption("N");
@@ -149,7 +144,7 @@ public class BoardController {
 	}
 
 	@GetMapping("/board/updateBoard/{boardSn}")
-	public String updateBoard(@PathVariable Integer boardSn, Model model) {
+	public String updateBoard(@PathVariable Long boardSn, Model model) {
 		Board board = boardService.getBoardById(boardSn);
 		model.addAttribute("board", board);
 		return "/board/updateBoard";
@@ -159,7 +154,7 @@ public class BoardController {
 	@ResponseBody
 	public ResponseEntity<String> updatingBoard(@RequestBody BoardUpdatingDTO boardUpdatingDTO) {
 		try {
-			Integer boardSn = Integer.parseInt(boardUpdatingDTO.getBoardSn());
+			Long boardSn = Long.parseLong(boardUpdatingDTO.getBoardSn());
 			String boardTitle = boardUpdatingDTO.getBoardTitle();
 			String boardContent = boardUpdatingDTO.getBoardContent();
 			char priorityPostingOption = boardUpdatingDTO.getPriorityPostingOption();

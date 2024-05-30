@@ -31,11 +31,11 @@ public class BoardService {
 		return boardRepository.findAll();
 	}
 
-	public Board getBoardById(Integer id) {
+	public Board getBoardById(Long id) {
 		return boardRepository.findByboardSn(id).orElse(null);
 	}
 
-	public void deleteById(Integer id) {
+	public void deleteById(Long id) {
 		Optional<Board> boardOptional = boardRepository.findByboardSn(id);
 
 		if (boardOptional.isPresent()) {
@@ -47,13 +47,13 @@ public class BoardService {
 		}
 	}
 
-	public Page<Board> getBoardPage(PageRequestDTO pageRequestDTO) {
+	public Page<Board> getBoardPage(String usingOption, PageRequestDTO pageRequestDTO) {
 		int pageNo = pageRequestDTO.getPageNo();
 		int pageSize = pageRequestDTO.getPageSize();
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
-		return boardRepository.findAll(pageable);
+		return boardRepository.findByUsingOptionOrderByCreatedAtDesc(usingOption,pageable);
 	}
 
 

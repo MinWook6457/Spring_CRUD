@@ -19,7 +19,7 @@
 	function selectBoardList(pageNo) {
 		var param = {
 			pageNo : pageNo,
-			pageSize : 10,
+			pageSize : 10
 		}
 		$.ajax({
 			type : "POST",
@@ -114,7 +114,7 @@
 	*/
 	function createPagination(pages) {
 	var pageNo = pages.pageNo; // 현재 페이지 번호
-	var pageUnit = pages.pageUnit; // 한 화면에 보여줄 기사 개수 
+	var pageUnit = pages.pageSize; // 한 화면에 보여줄 기사 개수
 	var totalPages = pages.totalPages; // 전체 페이지
 	var totalElements = pages.totalElements; 
 	
