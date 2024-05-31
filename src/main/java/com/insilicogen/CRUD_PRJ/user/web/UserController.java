@@ -150,12 +150,8 @@ public class UserController {
 	        return "비밀번호 수정 실패";
 	    }
 	}
-<<<<<<< HEAD
-
 	@GetMapping("/user/readUser")
 	public String readUser(Model model) {
 		return "/user/readUser";
 	}
-=======
->>>>>>> 1c0a775e822b43cd9844517d972e1a957e426ba6
 }

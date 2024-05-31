@@ -180,14 +180,9 @@
 	<div class="container text-center mt-5">
 		<h3>${sessionScope.loginUser.userNm}님</h3>
 		<div class="row">
-<<<<<<< HEAD
 			<div class="col-sm-12 d-flex justify-content-between">
 				<input type="button" class="btn btn-primary" id="readUserBtn" value="내정보" onclick="location.href='/user/readUser'">
 				<input type="button" class="btn btn-primary" id="createBoardBtn" value="글쓰기" onclick="location.href='/board/createBoard'">
-=======
-			<div class="col-sm-12 text-lg-start text-right">
-				<input type="button" class="btn btn-primary" style="float:right;" id="createBoardBtn" value="글쓰기" onclick="location.href='/board/createBoard'">
->>>>>>> 1c0a775e822b43cd9844517d972e1a957e426ba6
 			</div>
 		</div>
 		<div class="table-responsive">
