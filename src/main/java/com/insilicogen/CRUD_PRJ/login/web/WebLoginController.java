@@ -88,4 +88,19 @@ public class WebLoginController {
 			return "redirect:/welcome";
 		}
 	}
+
+	@PostMapping("/home/guestLogin")
+	@ResponseBody
+	public String guestLogin(HttpServletRequest req, RedirectAttributes rdat){
+		System.out.println("비회원 로그인 컨트롤러 진입");
+
+		UserDto guestLoginUser = new UserDto();
+		guestLoginUser.setUserLoginId("guest");
+		guestLoginUser.setUserNm("비회원");
+
+		HttpSession session = req.getSession();
+		session.setAttribute("loginUser", guestLoginUser);
+
+		return "redirect:/home";
+	}
 }

@@ -218,6 +218,4 @@
 		 
 	    <input type="button" id="deleteBtn" class="btn btn-danger" value="탈퇴하기"  onclick="window.location.href">
 	    -->
-
-
 </body>
