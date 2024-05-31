@@ -24,7 +24,10 @@ public class BoardService {
 
 	@Transactional
 	public void saveBoard(Board board) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1c0a775e822b43cd9844517d972e1a957e426ba6
 		boardRepository.save(board);
 	}
 
