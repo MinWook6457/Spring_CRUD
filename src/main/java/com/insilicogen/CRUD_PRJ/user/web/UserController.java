@@ -137,7 +137,7 @@ public class UserController {
 		return "/user/modifyUserPW";
 	}
 	
-	@PostMapping("/user/modifyUserPW")
+	@PostMapping("/user/modifyPW")
 	@ResponseBody
 	public String modifyUserData(@RequestBody UserModifyVO userModifyVo) {
 		System.out.println("비밀번호 수정 컨트롤러 진입");
@@ -153,5 +153,10 @@ public class UserController {
 	@GetMapping("/user/readUser")
 	public String readUser(Model model) {
 		return "/user/readUser";
+	}
+
+	@GetMapping("/user/modifyUserPW")
+	public String modifyUser(Model model) {
+		return "/user/modifyUserPW";
 	}
 }

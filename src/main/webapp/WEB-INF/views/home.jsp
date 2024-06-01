@@ -134,7 +134,7 @@
 
         <button class="btn btn-dark w-100 py-2 mb-5" type="submit" id="loginBtn">로그인</button>
         <button class="btn btn-primary w-100 py-2 mb-1" type="button" id="registerBtn" onclick="window.location.href='/user/insertUser.do';">회원가입</button>
-        <button class="btn btn-outline-primary w-100 py-2" type="button" id="findPwBtn" onclick="redirectToFindUserInfo();">비밀번호 찾기</button>
+        <button class="btn btn-outline-primary w-100 py-2 mb-1" type="button" id="modifyPwBtn" onclick="window.location.href='/user/modifyUserPW';">비밀번호 변경</button>
         <button class="btn btn-outline-secondary w-100 py-2 mt-3" type="button" id="guestLoginBtn">비회원 로그인</button>
         <p class="mt-5 mb-3 text-body-secondary">&copy; Min-wook Kim</p>
     </form>
@@ -184,7 +184,5 @@
         });
     });
 
-    function redirectToFindUserInfo() {
-        window.location.href = '/user/findUserInfo';
-    }
+
 </script>

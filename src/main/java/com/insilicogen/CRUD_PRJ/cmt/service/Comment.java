@@ -1,6 +1,4 @@
-package com.insilicogen.CRUD_PRJ.bbs.service;
-
-import java.time.LocalDateTime;
+package com.insilicogen.CRUD_PRJ.cmt.service;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.insilicogen.CRUD_PRJ.bbs.service.BaseEntity;
+import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 import com.insilicogen.CRUD_PRJ.user.service.User;
 
 import jakarta.validation.constraints.NotBlank;
@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "CMNT")
-public class Comment extends BaseEntity{
+public class Comment extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cmntSn;
@@ -35,7 +35,7 @@ public class Comment extends BaseEntity{
 	@Lob // Clob 설정
 	private String commentContent; // 댓글 내용
 	
-	@Column(name = "DEL_YN")
+	@Column(name = "DEL_YN") // 삭제 여부
 	@NotNull
 	private Character isDeletedOption;
 	

@@ -53,7 +53,7 @@ public class BoardService {
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
-		return boardRepository.findByUsingOptionOrderByCreatedAtDesc(usingOption,pageable);
+		return boardRepository.findByUsingOptionOrderByPriorityPostingOptionDescCreatedAtDesc(usingOption,pageable);
 	}
 
 

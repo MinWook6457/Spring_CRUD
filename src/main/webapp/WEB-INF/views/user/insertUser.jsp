@@ -220,32 +220,29 @@ $(document).ready(function() {
 <body class="bg-body-tertiary">
 <div class="container">
   <main>
-    <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="/resources/image/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-      <h2>회원가입</h2>
+    <div class="py-3 text-center">
+      <img class="d-block mx-auto mb-4" src="/resources/image/brand/img.png" alt="" width="150" height="80">
+      <h3>회원가입</h3>
     </div>
     <div class="row g-6">
       <div class="col-md-12 col-lg-12">
-        <h4 class="mb-3">모든 정보를 입력해주세요!</h4>
         <form class="row g-3 needs-validation" novalidate="" id="registerForm"  method="POST">
            	<div class="row g-2">
             	<div class="col-sm-4">
-             		 <label for="login_id" class="form-label">Input Login ID</label>
+             		 <label for="login_id" class="form-label">로그인 아이디</label>
              		 <input type="text" class="form-control" id="login_id" placeholder="아이디" required="" minlength="4">
              		 <div class="invalid-feedback">
     				 아이디는 2자 이상!
     				 </div>
             	</div>
-
             	<div class="col-sm-4">
-             		 <label for="user_name" class="form-label">UserName</label>
+             		 <label for="user_name" class="form-label">닉네임</label>
                		 <input type="text" class="form-control" id="user_name">
            		</div>
 
             	<div class="col-sm-4">
-              		 <label for="password" class="form-label">Password</label>
+              		 <label for="password" class="form-label">비밀번호</label>
               		 <input type="password" class="form-control" id="password" placeholder="비밀번호" pattern="^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$">
-           		 	 
            		 	 <div class="invalid-feedback">
     				  비밀번호는 특수문자,영어,숫자 포함 8글자 이상입니다.
     				  </div>

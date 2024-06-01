@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 
-
+// DAO => CRUD 기능 사용
 public interface BoardRepository extends JpaRepository<Board, Long> {
 	@EntityGraph(attributePaths = {"files"})
 	Optional<Board> findByboardSn(Long boardSn);
@@ -29,5 +29,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 //	List<Board> findUsingOptionAndOrderByPriorityPostingOptionDescCreatedAtDesc(
 //			String usingOption, Pageable pageable);
 
-	Page<Board> findByUsingOptionOrderByCreatedAtDesc(String usingOption, Pageable pageable);
+	Page<Board> findByUsingOptionOrderByPriorityPostingOptionDescCreatedAtDesc(String usingOption, Pageable pageable);
 }

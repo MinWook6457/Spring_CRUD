@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="../resources/js/jquery/jquery-3.7.1.js"></script>
-<script src="../resources/js/jquery/jquery.validate.js"></script>
-
+<jsp:include page="../common/include.jsp" />
 <title>비밀번호 찾기 페이지</title>
 
 <script>
@@ -42,16 +39,33 @@
 		})		
 	})
 </script>
-<form id="findUserForm" action="/user/findUserPW" method='post'>
-	<label for="userLoginId">아이디를 입력해주세요:</label> <input type="text" id="userLoginId" name="userLoginId" required> 
-	<select id="hint_question" name="hintQuestion">
-		<c:forEach var="hintQuestion" items="${hintQuestions}">
-			<option value="${hintQuestion.pswdHintSn} , ${hintQuestion.hintCn}">${hintQuestion.hintCn}</option>
-		</c:forEach>
-	</select> 
-	<br><br> 
-	<label for="hint_comment">비밀번호 힌트 답변 : </label> 
-	<input type="text" id="hint_comment" name="hintAnswer"> 
-	<input type="button" id="findUserInfoBtn" value="입력">
-</form>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+	<div class="card p-4">
+
+		<form id="findUserForm" action="/user/findUserPW" method='post'>
+			<div class="mb-3">
+				<label for="userLoginId" class="form-label">아이디를 입력해주세요:</label>
+				<input type="text" id="userLoginId" name="userLoginId" class="form-control" required>
+			</div>
+			<div class="mb-3">
+				<label for="hint_question" class="form-label">힌트 질문을 선택해주세요:</label>
+				<select id="hint_question" name="hintQuestion" class="form-select">
+					<c:forEach var="hintQuestion" items="${hintQuestions}">
+						<option value="${hintQuestion.pswdHintSn},${hintQuestion.hintCn}">${hintQuestion.hintCn}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label for="hint_comment" class="form-label">비밀번호 힌트 답변:</label>
+				<input type="text" id="hint_comment" name="hintAnswer" class="form-control" required>
+			</div>
+			<div class="text-center d-flex justify-content-between" >
+				<input type="button" id="findUserInfoBtn" value="입력" class="btn btn-primary">
+				<a class="btn btn-outline-primary" href="/home" role="button">뒤로가기</a>
+			</div>
+		</form>
+	</div>
+</div>
+
 

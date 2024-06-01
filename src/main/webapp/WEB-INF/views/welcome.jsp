@@ -175,6 +175,11 @@
 	html += '</ul>';  
 	$("#pagination").append(html);
 	}
+
+	function redirectToModifyPW() {
+		window.location.href = '/user/modifyUserPW';
+	}
+
 </script>
 <body>
 	<div class="container text-center mt-5">
@@ -202,14 +207,20 @@
 			</table>
 
 		</div>
+		<div class="text-end">
+			<button class="btn btn-outline-primary w-5 text-bg-dark mb-3 justify-content-between" type="button" id="findPwBtn" onclick="redirectToModifyPW();">비밀번호 변경</button>
+		</div>
 	</div>
+
+
 
 	<div class="container text-center mb-3 d-flex justify-content-center">
 		<nav aria-label="Page navigation">
 			<ul class="pagination" id="pagination"></ul>
 		</nav>
 	</div>
-	<!-- 
+
+	<!--
 		<div>
 			<input type="button" class="btn btn-secondary" id="modifyBtn"
 				value="회원 정보 수정"
@@ -219,3 +230,5 @@
 	    <input type="button" id="deleteBtn" class="btn btn-danger" value="탈퇴하기"  onclick="window.location.href">
 	    -->
 </body>
+
+

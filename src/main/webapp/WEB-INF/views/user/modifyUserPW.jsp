@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="../resources/js/jquery/jquery-3.7.1.js"></script>
-<script src="../resources/js/jquery/jquery.validate.js"></script>
+<jsp:include page="../common/include.jsp" />
 
 <script>
 $(document).ready(function(){
@@ -36,13 +35,13 @@ $(document).ready(function(){
 		});
 		$('#modifyUserPWBtn').click(function(event)	{
 			var userModifyData = {
-				userLoginId : $('#userLoginId').val(),
-	            userPassWord : $('#password').val()
+				userLoginId : $('#loginId').val(),
+	            userPassWord : $('#changePassword').val()
 			}
 
 				$.ajax({
 				   type: 'POST',
-	          	   url : "/user/modifyUserPW",
+	          	   url : "/user/modifyPW",
 	          	   contentType: 'application/json',
 	               data: JSON.stringify(userModifyData),
 					 success : function(res){
@@ -58,16 +57,34 @@ $(document).ready(function(){
 	})
 </script>
 
-<title>비밀 번호 수정 폼</title>
-
 <body>
-	<h1> ${sessionScope.loginUser.userNm}님의 비밀번호 수정</h1>
-	<form id = "modifyUserPWForm" method = post >
-	<label for="login_id">로그인 ID </label> <input type="text" id="userLoginId" value="${sessionScope.loginUser.userLoginId}" readonly >
-	<br><br> 
-	<label for="user_name">닉네임 </label> <input type="text" id="user_name" value="${sessionScope.loginUser.userLoginId}" readonly >
-	<br><br> 
-	<label for="password">패스워드</label> <input type="password" id="password" value="${sessionScope.loginUser.password}">
-	<input type="button" id="modifyUserPWBtn" value="수정">
-	</form>
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-6">
+			<div class="card">
+				<div class="card-header bg-primary text-white">
+					비밀번호가 기억나지 않는다면 변경하세요!
+				</div>
+				<div class="card-body">
+					<div class="mb-3">
+						<label for="username" class="form-label">사용자명</label>
+						<input type="text" id="username" class="form-control" value="${sessionScope.loginUser.userNm}" readonly>
+					</div>
+					<div class="mb-3">
+						<label for="loginId" class="form-label">아이디</label>
+						<input type="text" id="loginId" class="form-control" value="${sessionScope.loginUser.userLoginId}" readonly>
+					</div>
+					<div class="mb-3">
+						<label for="changePassword" class="form-label">변경할 비밀번호</label>
+						<input type="password" id="changePassword" class="form-control">
+					</div>
+					<div class="col-sm-12 d-flex justify-content-between">
+						<button class="btn btn-outline-primary w-5 text-bg-dark mb-3 " type="button" id="modifyUserPWBtn">변경하기</button>
+						<a class="btn btn-outline-primary mb-3" href="/welcome" role="button">뒤로가기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
