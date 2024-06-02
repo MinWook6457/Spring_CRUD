@@ -5,17 +5,16 @@ import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 import com.insilicogen.CRUD_PRJ.cmt.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 
 import java.util.Collections;
 import java.util.List;
 
 @Service
+@Transactional
 public class CommentService {
     @Autowired
     CommentRepository commentRepository;
-
-    @Autowired
-    private BoardRepository boardRepository;
 
     public void saveComment(Comment comment) {
         commentRepository.save(comment);

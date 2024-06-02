@@ -9,6 +9,8 @@ import com.insilicogen.CRUD_PRJ.bbs.service.FileEntity;
 import com.insilicogen.CRUD_PRJ.bbs.service.FileService;
 import com.insilicogen.CRUD_PRJ.bbs.service.dto.FileUploadResultDTO;
 import com.insilicogen.CRUD_PRJ.bbs.service.dto.PageRequestDTO;
+import com.insilicogen.CRUD_PRJ.cmt.service.Comment;
+import com.insilicogen.CRUD_PRJ.cmt.service.CommentService;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,8 @@ public class BoardController {
 
     @Autowired
     private FileService fileService;
+    @Autowired
+    private CommentService commentService;
 
 	@GetMapping("/board/createBoard")
 	public String createBoard(Model model) {
@@ -130,7 +134,14 @@ public class BoardController {
 	@GetMapping("/board/read/{boardSn}")
 	public String readBoard(@PathVariable Long boardSn, Model model) {
 		Board board = boardService.getBoardById(boardSn);
+
+		List<Comment> comments = commentService.getAllCommentsByBoardId(boardSn);
+
+		System.out.println(comments);
+
 		model.addAttribute("board", board);
+		model.addAttribute("comments", comments);
+
 		return "/board/readBoard";
 	}
 

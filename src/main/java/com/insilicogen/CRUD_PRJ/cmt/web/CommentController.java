@@ -47,7 +47,6 @@ public class CommentController {
             return ResponseEntity.badRequest().body("Invalid board ID");
         }
 
-
         User user = board.getUser();
         if (user == null) {
             return ResponseEntity.badRequest().body("Invalid user ID");
@@ -71,22 +70,23 @@ public class CommentController {
         return ResponseEntity.ok("댓글 작성 완료");
     }
 
-    // 회원 댓글 조회
-    @GetMapping("/comment/readComment/{commentSn}")
-    public ResponseEntity<?> readComment(@PathVariable Long commentSn) { // <?> 를 통해 어느 타입이든 반환 가능하게 조정
-        Comment comment = commentService.getCommentById(commentSn);
-        if(comment==null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("댓글이 없습니다.");
-        }
-
-        Board board = comment.getBoard();
-        if(board==null){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글에 해당되는 게시글이 존재하지 않음!");
-        }
-
-        List<Comment> comments = commentService.getAllCommentsByBoardId(board.getBoardSn());
-
-
-        return ResponseEntity.ok(comments);
-    }
+//    // 회원 댓글 조회
+//    @GetMapping("/comment/readComment/{commentSn}")
+//    public ResponseEntity<?> readComment(@PathVariable Long commentSn,Model model) { // <?> 를 통해 어느 타입이든 반환 가능하게 조정
+//        Comment comment = commentService.getCommentById(commentSn);
+//        if(comment==null){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("댓글이 없습니다.");
+//        }
+//
+//        Board board = comment.getBoard();
+//        if(board==null){
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글에 해당되는 게시글이 존재하지 않음!");
+//        }
+//
+//        List<Comment> comments = commentService.getAllCommentsByBoardId(board.getBoardSn());
+//
+//        model.addAttribute("comments", comments);
+//
+//        return ResponseEntity.ok(comments);
+//    }
 }

@@ -36,6 +36,8 @@
             });
         });
     });
+
+
 </script>
 
 <body>
@@ -91,15 +93,26 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-outline-primary" href="/welcome" role="button">뒤로가기</a>
     </div>
+
+    <div class="mt5">
+        <h5>댓글</h5>
+        <ul>
+            <c:forEach var="comment" items="${comments}">
+                <li>${comment.commentContent}</li>
+            </c:forEach>
+        </ul>
+    </div>
+
     <form id="createComment" method="POST">
         <div class="form-group">
             <label for="comment">댓글</label>
-            <textarea class="form-control" id="comment" name="boardContent" rows="5" required></textarea>
+            <textarea class="form-control" id="comment" name="commentContent" rows="1" required></textarea>
         </div>
         <div class="col-sm-12 d-flex justify-content-between">
             <button class="btn btn-outline-primary w-3 text-bg-dark mb-3" type="submit" id="createCommentBtn">작성하기</button>
         </div>
     </form>
+
 </div>
 <script>
     // Function to resize textareas to fit their content
