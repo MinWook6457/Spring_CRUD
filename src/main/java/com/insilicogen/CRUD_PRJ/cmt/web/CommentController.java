@@ -9,14 +9,14 @@ import com.insilicogen.CRUD_PRJ.user.repository.UserRepository;
 import com.insilicogen.CRUD_PRJ.user.service.User;
 import com.insilicogen.CRUD_PRJ.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -41,11 +41,16 @@ public class CommentController {
     @PostMapping("/comment/createComment")
     @ResponseBody
     public ResponseEntity<String> addComment(@RequestBody CommentDTO commentDto) {
-        User user = userRepository.findById(commentDto.getUserSn()).orElse(null);
-        Board board = boardRepository.findById(commentDto.getBoardSn()).orElse(null);
 
-        if (user == null || board == null) {
-            return ResponseEntity.badRequest().body("Invalid user or board ID");
+        Board board = boardRepository.findById(commentDto.getBoardSn()).orElse(null);
+        if (board == null) {
+            return ResponseEntity.badRequest().body("Invalid board ID");
+        }
+
+
+        User user = board.getUser();
+        if (user == null) {
+            return ResponseEntity.badRequest().body("Invalid user ID");
         }
 
         System.out.println(user);
@@ -64,5 +69,24 @@ public class CommentController {
         commentService.saveComment(comment);
 
         return ResponseEntity.ok("댓글 작성 완료");
+    }
+
+    // 회원 댓글 조회
+    @GetMapping("/comment/readComment/{commentSn}")
+    public ResponseEntity<?> readComment(@PathVariable Long commentSn) { // <?> 를 통해 어느 타입이든 반환 가능하게 조정
+        Comment comment = commentService.getCommentById(commentSn);
+        if(comment==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("댓글이 없습니다.");
+        }
+
+        Board board = comment.getBoard();
+        if(board==null){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글에 해당되는 게시글이 존재하지 않음!");
+        }
+
+        List<Comment> comments = commentService.getAllCommentsByBoardId(board.getBoardSn());
+
+
+        return ResponseEntity.ok(comments);
     }
 }

@@ -8,8 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentDTO {
     private Long boardSn;
-    private Long userSn;
-    private String userName;
     private String content;
-
 }

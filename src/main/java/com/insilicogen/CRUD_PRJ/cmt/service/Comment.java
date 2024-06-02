@@ -28,7 +28,7 @@ import lombok.Setter;
 public class Comment extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cmntSn;
+	private Long commentSn;
 	
 	@Column(name = "CMNT_CN")
 	@NotBlank

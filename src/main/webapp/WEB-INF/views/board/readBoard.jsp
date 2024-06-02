@@ -8,9 +8,13 @@
         $("#createComment").submit(function(event) {
             event.preventDefault();
 
+            var boardSn = "${board.boardSn}";
+
+            console.log(boardSn);
+
+
             var comment = {
-                userSn: ${sessionScope.loginUser.id},
-                boardSn: ${board.boardSn},
+                boardSn: boardSn,
                 content: $('#comment').val()
             };
 
@@ -18,7 +22,7 @@
 
             $.ajax({
                 method: 'POST',
-                url: "/comment/createComment",
+                url: "http://localhost:8080/comment/createComment",
                 contentType: 'application/json',
                 data: JSON.stringify(comment),
                 success: function(response) {
