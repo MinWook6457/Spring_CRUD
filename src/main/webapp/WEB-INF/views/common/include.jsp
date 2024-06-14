@@ -11,6 +11,7 @@
 
 <script src="/resources/js/bootstrap/bootstrap.bundle.js"></script>
 <script src="/resources/js/bootstrap/bootstrap-datepicker.min.js"></script>
+<script src="/resources/js/chart/chart.js"></script>
 
 <!-- <script src="../resources/js/jquery/jquery-3.7.1.js"></script> -->
 <!-- <script src="../resources/js/jquery/jquery.validate.js"></script> -->
