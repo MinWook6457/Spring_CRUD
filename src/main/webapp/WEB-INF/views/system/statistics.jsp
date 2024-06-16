@@ -1,29 +1,53 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../common/include.jsp"/>
 
+<!-- 회원 성별, 나이, 가입 시기 통계 -->
 <div>
-    <canvas id="myChart"></canvas>
+    <div>
+        <div className='chart d-flex justify-content-center'>
+            <h1>성별 통계</h1>
+        </div>
+        <div>
+            <canvas id="genderChart" style="width: 150px; height: 150px;"></canvas>
+        </div>
+    </div>
+    <div>
+
+    </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const ctx = document.getElementById('myChart').getContext('2d');
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('genderChart').getContext('2d');
         new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Male', 'Female'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: 'Gender Distribution',
+                    data: [${maleCount}, ${femaleCount}],
+                    backgroundColor: ['#36A2EB', '#FF6384'],
                     borderWidth: 1
                 }]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const label = context.label || '';
+                                const value = context.raw || 0;
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = total ? (value / total * 100).toFixed(2) : 0;
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
                     }
                 }
             }
