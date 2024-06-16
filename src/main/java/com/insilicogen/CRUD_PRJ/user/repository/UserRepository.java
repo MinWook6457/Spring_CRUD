@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.insilicogen.CRUD_PRJ.user.service.PSWD_HINT;
 import com.insilicogen.CRUD_PRJ.user.service.User;
 
+import java.util.List;
+
 @Repository 
 public interface UserRepository extends JpaRepository<User, Long>{
 	User findByUserLoginId(String userLoginId); // 로그인 아이디 조회
@@ -31,4 +33,10 @@ public interface UserRepository extends JpaRepository<User, Long>{
     // 여성 유저 조회
     @Query("select count(u) from User u where u.sex = 'F'")
     long countFemaleUsers();
+
+    // 유저 나이
+    @Query("SELECT YEAR(CURRENT_DATE()) - YEAR(u.dateOfBirth) FROM User u")
+    List<Integer> getUsersAge();
+
+    List<User> findAllByOrderByCreatedAtDesc();
 }

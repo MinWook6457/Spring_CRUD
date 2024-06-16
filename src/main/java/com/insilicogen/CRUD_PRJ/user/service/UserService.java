@@ -9,6 +9,8 @@ import com.insilicogen.CRUD_PRJ.user.repository.UserRepository;
 import com.insilicogen.CRUD_PRJ.user.service.VO.UserModifyVO;
 import com.insilicogen.CRUD_PRJ.user.service.dto.UserDto;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserService {
 
@@ -21,6 +23,8 @@ public class UserService {
 	}
 
 	public User registerUser(UserDto userDto, PSWD_HINT pswdHint) {
+		LocalDateTime createdAt = LocalDateTime.now();
+		LocalDateTime updatedAt = LocalDateTime.now();
 		// UserDto 객체를 User 엔티티로 변환
 		User user = new User();
 
@@ -38,6 +42,8 @@ public class UserService {
 		user.setDateOfBirth(userDto.getDateOfBirth());
 		user.setHintAnswer(userDto.getHintAnswer());
 		user.setPswdHintSn(pswdHint);
+		user.setCreatedAt(createdAt);
+		user.setUpdatedAt(updatedAt);
 		// UserRepository를 사용하여 User 엔티티를 저장
 		this.userRepository.save(user);
 

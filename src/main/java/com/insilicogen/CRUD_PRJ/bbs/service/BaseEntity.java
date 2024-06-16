@@ -40,6 +40,4 @@ public class BaseEntity {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-
 }

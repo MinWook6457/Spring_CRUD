@@ -14,18 +14,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.insilicogen.CRUD_PRJ.bbs.service.BaseEntity;
 import com.insilicogen.CRUD_PRJ.bbs.service.Board;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size; // Hibernate Validator 인터페이스 : jakarta
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "User_TBL")
-public class User {
+@NoArgsConstructor
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userSn;

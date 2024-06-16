@@ -1,5 +1,6 @@
 package com.insilicogen.CRUD_PRJ.user.web;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,6 +57,8 @@ public class UserController {
 	@PostMapping("/user/insertUser.json")
 	@ResponseBody
 	public User insertUserJSON(@RequestBody @Valid UserFormDto formData) {
+
+
 		System.out.println("insertUserJSON 컨트롤러 진입");
 		UserDto userDto = formData.getBody();
 
@@ -65,6 +68,7 @@ public class UserController {
 		PSWD_HINT pwsdHint = new PSWD_HINT(pswdHintSn, pswdHintCn);
 
 		User registUser = userService.registerUser(userDto, pwsdHint);
+
 		return registUser;
 	}
 
