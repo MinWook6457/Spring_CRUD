@@ -65,13 +65,8 @@ public class WebLoginController {
 	@ResponseBody
 	public String login(@RequestBody UserLoginVo userLoginVo,						
 						HttpServletRequest req, RedirectAttributes rdat) {
-		System.out.println("로그인 컨트롤러 진입");
-		
 		String userLoginId = userLoginVo.getUserLoginId();
 		String password = userLoginVo.getUserPassWord();
-		
-		System.out.println("프론트에서 보낸 ID : " + userLoginId);
-		System.out.println("프론트에서 보낸 PW : " + password);
 
 		// 로그인이 실패한 경우
 		if (userService.authenticate(userLoginId, password) == null) {
