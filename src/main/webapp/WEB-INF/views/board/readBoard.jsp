@@ -27,7 +27,7 @@
                 data: JSON.stringify(comment),
                 success: function(response) {
                     alert('댓글 작성 완료');
-                    location.href = '/welcome';
+                    location.href = '/board/readBoard';
                 },
                 error: function(xhr, status, error) {
                     alert('댓글 작성 중 오류가 발생하였습니다.');
@@ -98,7 +98,10 @@
         <h5>댓글</h5>
         <ul>
             <c:forEach var="comment" items="${comments}">
-                <li>${comment.commentContent}</li>
+                <ul>${comment.commentContent}</ul>
+                <ul>${comment.user.userNm}</ul>
+                <fmt:parseDate var="parsedDate" value="${comment.createdAt}" pattern="yyyy-MM-dd" />
+                <fmt:formatDate pattern="yyyy-MM-dd" value="${parsedDate}" />
             </c:forEach>
         </ul>
     </div>
