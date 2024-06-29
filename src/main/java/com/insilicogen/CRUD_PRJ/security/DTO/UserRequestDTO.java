@@ -1,7 +1,7 @@
 package com.insilicogen.CRUD_PRJ.security.DTO;
 
-import hello.hellospring.user.entity.Authority;
-import hello.hellospring.user.entity.Member;
+import com.insilicogen.CRUD_PRJ.user.service.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,12 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberRequestDTO {
+public class UserRequestDTO {
     private String email;
     private String password;
     private String nickname;
-    public Member toMember(PasswordEncoder passwordEncoder) {
-        return Member.builder()
+    public User toMember(PasswordEncoder passwordEncoder) {
+        return User.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)

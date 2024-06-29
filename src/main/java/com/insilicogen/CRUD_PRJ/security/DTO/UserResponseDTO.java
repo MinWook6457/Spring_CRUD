@@ -1,6 +1,6 @@
 package com.insilicogen.CRUD_PRJ.security.DTO;
 
-import hello.hellospring.user.entity.Member;
+import com.insilicogen.CRUD_PRJ.user.service.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberResponseDTO {
+public class UserResponseDTO {
     private String email;
     private String nickname;
-    public static MemberResponseDTO of(Member member) {
-        return MemberResponseDTO.builder()
-                .email(member.getEmail())
-                .nickname(member.getNickname())
+    public static UserResponseDTO of(User user) {
+        return UserResponseDTO.builder()
+                .email(user.getUserLoginId())
+                .nickname(user.getUserNm())
                 .build();
     }
 }
