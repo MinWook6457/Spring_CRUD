@@ -1,5 +1,6 @@
 package com.insilicogen.CRUD_PRJ.security.DTO;
 
+import com.insilicogen.CRUD_PRJ.security.role.UserRole;
 import com.insilicogen.CRUD_PRJ.user.service.*;
 
 import lombok.AllArgsConstructor;
@@ -17,12 +18,12 @@ public class UserRequestDTO {
     private String email;
     private String password;
     private String nickname;
-    public User toMember(PasswordEncoder passwordEncoder) {
+    public User toUser(PasswordEncoder passwordEncoder) {
         return User.builder()
-                .email(email)
+                .userLoginId(email)
                 .password(passwordEncoder.encode(password))
-                .nickname(nickname)
-                .authority(Authority.ROLE_USER)
+                .userNm(nickname)
+                .userRole(UserRole.ROLE_USER)
                 .build();
     }
 

@@ -11,6 +11,7 @@ import com.insilicogen.CRUD_PRJ.user.service.PSWD_HINT;
 import com.insilicogen.CRUD_PRJ.user.service.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository 
 public interface UserRepository extends JpaRepository<User, Long>{
@@ -39,4 +40,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
     List<Integer> getUsersAge();
 
     List<User> findAllByOrderByCreatedAtDesc();
+
+    boolean existsByUserLoginId(String userLoginId);
+
+    Optional<User> findByUserNm(String userNm);
 }
